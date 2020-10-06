@@ -2,14 +2,15 @@ module Main where
 
 import           XMonad
 import           XMonad.Actions.UpdatePointer
-import           XMonad.Hooks.ManageDocks
-import qualified XMonad.Hooks.EwmhDesktops      as Ewmh
 import           XMonad.Hooks.DynamicLog
+import qualified XMonad.Hooks.EwmhDesktops    as Ewmh
+import           XMonad.Hooks.ManageDocks
 import           XMonad.Hooks.SetWMName
-import           XMonad.Layout.NoBorders
 import           XMonad.Layout.Fullscreen
-import           XMonad.Layout.Spiral
+import           XMonad.Layout.NoBorders
 import           XMonad.Layout.PerWorkspace
+import           XMonad.Layout.Spiral
+import           XMonad.Layout.ThreeColumns
 import           XMonad.Util.EZConfig
 
 import           Colors
@@ -32,8 +33,10 @@ main  = xmonad =<< xmobar (Ewmh.ewmh def
         , fullscreenManageHook
         ]
   , layoutHook  = let full = noBorders (fullscreenFull Full)
+                      tall = Tall 1 (3/100) (1/2)
+                      threeCol = ThreeCol 1 (3/100) (1/2)
                    in onWorkspace "9" full . smartBorders . avoidStruts $
-                       Tall 1 (3/100) (1/2) ||| spiral (6/7) ||| full
+                       tall ||| Mirror tall ||| threeCol ||| spiral (6/7) ||| full
   , logHook     = dynamicLogWithPP def >> updatePointer (0.75, 0.75) (0.75, 0.75)
   , handleEventHook = mconcat
         [ handleEventHook def

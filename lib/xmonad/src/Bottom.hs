@@ -1,6 +1,6 @@
-import Xmobar
+import           Xmobar
 
-import Colors
+import           Colors
 
 
 defaultHeight :: Int
