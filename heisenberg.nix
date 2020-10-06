@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 
-let firefox = pkgs.firefox-beta-bin;
+let firefox = pkgs.latest.firefox-beta-bin;
 in
 {
   home = {
