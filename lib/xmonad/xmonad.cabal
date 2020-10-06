@@ -1,0 +1,29 @@
+name:                xmonad
+version:             0.1.0.0
+-- synopsis:
+-- description:
+license:             BSD3
+license-file:        LICENSE
+author:              Hizbullah Abdul Aziz
+maintainer:          hizbullah.abdul@gmail.com
+-- copyright:
+-- category:
+build-type:          Simple
+--extra-source-files:  ChangeLog.md
+cabal-version:       >=1.10
+
+executable xmonad
+  main-is:             Main.hs
+  hs-source-dirs:      src
+  other-modules:       Colors
+  -- other-extensions:
+  build-depends:       base, xmonad, xmonad-contrib, X11
+  default-language:    Haskell2010
+
+executable xmobar
+  main-is:             Bottom.hs
+  hs-source-dirs:      src
+  other-modules:       Colors
+  build-depends:       base, xmobar
+  -- xmobar needs -threaded
+  ghc-options:         -threaded

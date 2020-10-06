@@ -1,0 +1,298 @@
+# 
+# Basic settings
+#
+set header_cache = '/home/archbung/.cache/neomutt/headers'
+set message_cachedir = '/home/archbung/.cache/neomutt/messages'
+set implicit_autoview = yes
+alternative_order text/enriched text/plain text
+set delete = yes
+
+set sort = threads
+set sort_aux = reverse-last-date-received
+set sort_browser = date
+set pager_context = 3
+set edit_headers = yes
+set mailcap_path = "~/.mutt/mailcap"
+
+set date_format = "%y-%m-%d %T"
+#set index_format = "%2C | %Z [%d] %-30.30F (%-4.4c) %s"
+
+# Sidebar
+set sidebar_visible = yes
+set sidebar_short_path = yes
+set sidebar_width = 25
+#set sidebar_format = '%B%?F? [%F]?%* %?N?%N/?%S'
+set sidebar_format = '%D [%F]%* %?N?%N/?%S'
+
+
+#
+# Vim-like keybindings
+#
+bind generic                    z   noop
+bind index,pager,attach         g   noop
+bind index,pager                d   noop
+bind index,pager                s   noop
+bind index,pager                c   noop
+bind generic,pager              t   noop
+
+# Moving around
+bind attach,browser,index       gg  first-entry
+bind attach,browser,index       G   last-entry
+bind pager                      gg  top
+bind pager                      G   bottom
+bind pager                      k   previous-line
+bind pager                      j   next-line
+
+# Scrolling
+bind attach,browser,pager,index \CF next-page
+bind attach,browser,pager,index \CB previous-page
+bind attach,browser,pager,index \Cu half-up
+bind attach,browser,pager,index \Cd half-down
+bind browser,pager              \Ce next-line
+bind browser,pager              \Cy previous-line
+bind index                      \Ce next-line
+bind index                      \Cy previous-line
+
+bind pager,index                dd  delete-message
+
+# Mail & Reply
+#bind index                      \Cm list-reply # Doesn't work currently
+
+# Threads
+bind browser,pager,index        N   search-opposite
+bind pager,index                dT  delete-thread
+bind pager,index                dt  delete-subthread
+bind pager,index                gt  next-thread
+bind pager,index                gT  previous-thread
+bind index                      za  collapse-thread
+bind index                      zA  collapse-all # Missing :folddisable/foldenable
+
+bind index,pager                '[' sidebar-prev
+bind index,pager                ']' sidebar-next
+bind index,pager                '#' sidebar-open
+bind index,pager                \CB sidebar-toggle-visible
+
+macro index                     \\  "<vfolder-from-query>"
+bind index,pager                tt   modify-labels
+macro index,pager               ta  "<modify-labels>+archive -unread -inbox\n"
+macro index                     c   "<change-folder>?<change-dir><home>^K+<enter>"
+
+
+#
+# Theme
+#
+# set default
+  color normal color250 default
+
+# main colors
+  color status green default
+  color indicator brightwhite color235
+  color tree blue default
+  color error brightred default
+  color message brightyellow default
+
+#
+# message states
+#
+# order matters here since some states override others
+#
+
+# messages to me
+  color index brightblack default "~P"
+  color index brightred default "~F"
+
+# threads containing new messages
+  color index brightcyan default "~(~N)"
+
+# new messages themselves
+  color index yellow default "~N"
+  color index brightyellow default "~N ~p"
+
+# tagged
+  color index brightgreen default "~T"
+
+# deleted
+  color index red default "~D"
+
+# set up the headers
+  color header brightyellow default "^from:"
+  color header yellow default "^to:"
+  color header yellow default "^cc:"
+  color header blue default "^date:"
+  color header brightblue default "^subject:"
+
+# message bodies
+  color attachment brightblack default
+  color search red brightblack
+  color signature cyan default
+  color tilde blue default
+
+# gpg
+  color body       brightgreen   default "^gpg: Good signature.*"
+  color body       brightred     default "^gpg: BAD signature.*"
+  color body       yellow        default "^gpg: Can't check signature.*"
+
+# urls
+  color body brightblue default "(^|<| )mailto:[^ ]+@[^ ]( |>|$)"
+  color body brightblue default "(^|<| )(http|https|ftp|file|telnet|news|finger)://[^ ]+( |>|$)"
+
+# smileys, the right way and the backward-ass euro way
+  color body brightmagenta default "(^| )+(|[<>|])[8;:](|[^ ])[)(/|DOPS]( |$)+"
+  color body brightmagenta default "(^| )+[)(/|DOPS](|[^ ])[8;:](|[<>|])( |$)+"
+
+# *bold*, _underline_, and /italic/
+  color body brightcyan default "(^| )\\*[^*]+\\*( |$)"
+  color body brightcyan default "(^| )_[^_]+_( |$)"
+  color body brightcyan default "(^| )/[^/]+/( |$)"
+
+# quote blocks
+  color quoted magenta default
+  color quoted1 cyan default
+  color quoted2 green default
+  color quoted3 magenta default
+  color quoted4 cyan default
+  color quoted5 green default
+  color quoted6 magenta default
+  color quoted7 cyan default
+
+# sidebar
+  color sidebar_new yellow default
+
+
+#
+# Command formats for gpg.
+#
+# Version notes:
+#
+#   GPG 2.1 introduces the option "--pinentry-mode", which requires
+#   the "loopback" argument in instances where "--passphrase-fd" is
+#   used.
+#
+# Some of the older commented-out versions of the commands use gpg-2comp from:
+#   http://70t.de/download/gpg-2comp.tar.gz
+#
+# %p    The empty string when no passphrase is needed,
+#       the string "PGPPASSFD=0" if one is needed.
+#
+#       This is mostly used in conditional % sequences.
+#
+# %f    Most PGP commands operate on a single file or a file
+#       containing a message.  %f expands to this file's name.
+#
+# %s    When verifying signatures, there is another temporary file
+#       containing the detached signature.  %s expands to this
+#       file's name.
+#
+# %a    In "signing" contexts, this expands to the value of the
+#       configuration variable $pgp_sign_as, if set, otherwise
+#       $pgp_default_key.  You probably need to
+#       use this within a conditional % sequence.
+#
+# %r    In many contexts, neomutt passes key IDs to pgp.  %r expands to
+#       a list of key IDs.
+
+# Section A: Key Management
+
+# The default key for encryption (used by $pgp_self_encrypt and
+# $postpone_encrypt).
+#
+# It will also be used for signing unless $pgp_sign_as is set to a
+# key.
+#
+# Unless your key does not have encryption capability, uncomment this
+# line and replace the keyid with your own.
+#
+# set pgp_default_key="0xC2FCAFB1282DB020"
+
+# If you have a separate signing key, or your key _only_ has signing
+# capability, uncomment this line and replace the keyid with your
+# signing keyid.
+#
+set pgp_sign_as="0xC2FCAFB1282DB020"
+
+
+# Section B: Commands
+
+# Note that we explicitly set the comment armor header since GnuPG, when used
+# in some localiaztion environments, generates 8bit data in that header, thereby
+# breaking PGP/MIME.
+
+# decode application/pgp
+#
+set pgp_decode_command="gpg --status-fd=2 %?p?--pinentry-mode loopback --passphrase-fd 0? --no-verbose --quiet --batch --output - %f"
+
+# Verify a signature
+#
+set pgp_verify_command="gpg --status-fd=2 --no-verbose --quiet --batch --output - --verify %s %f"
+
+# Decrypt an attachment
+#
+set pgp_decrypt_command="gpg --status-fd=2 %?p?--pinentry-mode loopback --passphrase-fd 0? --no-verbose --quiet --batch --output - --decrypt %f"
+
+# Create a PGP/MIME signed attachment
+#
+# set pgp_sign_command="gpg-2comp --comment '' --no-verbose --batch --output - %?p?--passphrase-fd 0? --armor --detach-sign --textmode %?a?-u %a? %f"
+#
+set pgp_sign_command="gpg %?p?--pinentry-mode loopback --passphrase-fd 0? --no-verbose --batch --quiet --output - --armor --textmode %?a?--local-user %a? --detach-sign %f"
+
+# Create a application/pgp inline signed message.  This style is obsolete but still needed for Hushmail recipients and some MUAs.
+#
+# set pgp_clearsign_command="gpg-2comp --comment '' --no-verbose --batch --output - %?p?--passphrase-fd 0? --armor --textmode --clearsign %?a?-u %a? %f"
+#
+set pgp_clearsign_command="gpg %?p?--pinentry-mode loopback --passphrase-fd 0? --no-verbose --batch --quiet --output - --armor --textmode %?a?--local-user %a? --clearsign %f"
+
+# Create an encrypted attachment (note that some users include the --always-trust option here)
+#
+# set pgp_encrypt_only_command="/usr/libexec/neomutt/pgpewrap gpg-2comp -v --batch --output - --encrypt --textmode --armor --always-trust -- -r %r -- %f"
+#
+set pgp_encrypt_only_command="/usr/libexec/neomutt/pgpewrap gpg --batch --quiet --no-verbose --output - --textmode --armor --encrypt -- --recipient %r -- %f"
+
+# Create an encrypted and signed attachment (note that some users include the --always-trust option here)
+#
+# set pgp_encrypt_sign_command="/usr/libexec/neomutt/pgpewrap gpg-2comp %?p?--passphrase-fd 0? -v --batch --output - --encrypt --sign %?a?-u %a? --armor --always-trust -- -r %r -- %f"
+#
+set pgp_encrypt_sign_command="/usr/libexec/neomutt/pgpewrap gpg %?p?--pinentry-mode loopback --passphrase-fd 0? --batch --quiet --no-verbose --textmode --output - %?a?--local-user %a? --armor --sign --encrypt -- --recipient %r -- %f"
+
+# Import a key into the public key ring
+#
+set pgp_import_command="gpg --no-verbose --import %f"
+
+# Export a key from the public key ring
+#
+set pgp_export_command="gpg --no-verbose --armor --export %r"
+
+# Verify a key
+#
+set pgp_verify_key_command="gpg --verbose --batch --fingerprint --check-sigs %r"
+
+# Read in the public key ring
+#
+set pgp_list_pubring_command="gpg --no-verbose --batch --quiet --with-colons --with-fingerprint --with-fingerprint --list-keys %r"
+
+# Read in the secret key ring
+#
+set pgp_list_secring_command="gpg --no-verbose --batch --quiet --with-colons --with-fingerprint --with-fingerprint --list-secret-keys %r"
+
+# Fetch keys
+# set pgp_getkeys_command="pkspxycwrap %r"
+
+# pattern for good signature - may need to be adapted to locale!
+# OK, here's a version which uses gnupg's message catalog:
+# set pgp_good_sign="^gpgv?: Good signature from"
+# set pgp_good_sign="`gettext -d gnupg -s 'Good signature from "' | tr -d '"'`"
+#
+# Output pattern to indicate a valid signature using --status-fd messages
+set pgp_good_sign="^\\[GNUPG:\\] GOODSIG"
+
+# Output pattern to verify a decryption occurred
+# This is now deprecated by pgp_check_gpg_decrypt_status_fd:
+# set pgp_decryption_okay="^\\[GNUPG:\\] DECRYPTION_OKAY"
+set pgp_check_gpg_decrypt_status_fd
+
+
+#
+# Accounts
+#
+folder-hook /home/archbung/mail/gmail \
+  source /home/archbung/.config/neomutt/gmail
+source /home/archbung/.config/neomutt/gmail
