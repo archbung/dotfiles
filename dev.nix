@@ -56,13 +56,14 @@
     viAlias = true;
     vimAlias = true;
     configure = {
+      customRC = builtins.readFile ./lib/config.vim;
+
       plug.plugins = with pkgs.vimPlugins;
         [ fugitive sensible vim-polyglot vim-gitgutter nerdtree
           fzf-vim fzfWrapper
           ultisnips vim-snippets ale
           onedark-vim lightline-vim gv-vim
         ];
-      customRC = builtins.readFile ./lib/config.vim;
     };
   };
 

@@ -1,3 +1,4 @@
+" vim:set ts=2 sts=2 sw=2 et:
 "
 " Basic settings
 "
@@ -12,6 +13,10 @@ set cmdheight=2
 set updatetime=300
 set shortmess+=c
 set signcolumn=yes
+
+set noswapfile
+set nobackup
+set nowritebackup
 
 " Colors
 set termguicolors
@@ -84,6 +89,17 @@ let g:UltiSnipsExpandTrigger = "<C-j>"
 let g:UltiSnipsJumpForwardTrigger = "<C-n>"
 let g:UltiSnipsJumpBackwardTrigger = "<C-b>"
 
+" Ale
+let g:ale_fixers = {
+      \   '*': [ 'remove_trailing_lines', 'trim_whitespace' ],
+      \   'haskell': [ 'stylish-haskell' ],
+      \ }
+let g:ale_fix_on_save = 1
+
+let g:ale_linters = {
+      \   'haskell': [ 'hlint' ],
+			\ }
+
 
 "
 " Keybindings
@@ -94,40 +110,14 @@ nnoremap j gj
 nnoremap k gk
 tnoremap <C-[> <C-\><C-n>
 
-" Coc
-" Use tab to trigger completion with characters ahead and navigate.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+nnoremap <leader>\ :NERDTreeToggle<CR>
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fr :History<CR>
+nnoremap <leader>bb :Buffers<CR>
+nnoremap <leader>sr :Rg<CR>
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1] =~# '\s'
-endfunction
 
-" Use <c-space> to trigger completion
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
-" Use <cr> to confirm completion
-if exists('complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
-
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostics-prev)
-nmap <silent> ]g <Plug>(coc-diagnostics-next)
-
-" Code navigations
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+"
+" Autocmd
+"
+au BufNewFile,BufRead *.spthy setf spthy
