@@ -17,6 +17,7 @@
         [ fugitive sensible vim-polyglot vim-gitgutter nerdtree
           fzf-vim fzfWrapper
           ultisnips vim-snippets ale
+          vimtex
           onedark-vim lightline-vim gv-vim
         ];
     };

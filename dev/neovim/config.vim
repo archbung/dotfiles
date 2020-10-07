@@ -50,6 +50,10 @@ command! -bang -nargs=* Rg
 command! -bang -nargs=? -complete=dir Files
       \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
+" Vimtex
+let g:tex_flavor = "latex"
+let g:vimtex_view_method = "zathura"
+
 " Lightline
 let g:lightline = {
       \ 'colorscheme': 'onedark',
