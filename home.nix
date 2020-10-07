@@ -3,7 +3,7 @@
 
 {
   imports = [ 
-    ./gpg.nix ./dev.nix
+    ./gpg.nix ./dev
     ./shells.nix ./terminal.nix
     ./gui.nix
     ./email.nix ./irc.nix
