@@ -9,7 +9,7 @@
   ];
 
   home.packages = with pkgs; [
-    gnumake gnum4 niv cachix
+    niv cachix
     shellcheck
     terraform
   ];
