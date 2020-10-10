@@ -18,11 +18,12 @@ in
 
   };
 
+  programs.autojump.enable = true;  # Autojump enables bash integration by default
+
   programs.bat.enable = true;
 
   programs.bash = {
     enable = true;
-    enableAutojump = true;
 
     historyControl = [
       "ignoredups" "erasedups"
