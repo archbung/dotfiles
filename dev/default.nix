@@ -9,7 +9,7 @@
   ];
 
   home.packages = with pkgs; [
-    niv cachix
+    gnumake gnum4 niv cachix
     shellcheck
     terraform
   ];
@@ -43,6 +43,11 @@
       core.editor = "${pkgs.neovim}/bin/nvim";
     };
 
+  };
+
+  programs.opam = {
+    enable = true;
+    enableBashIntegration = true;
   };
 
   services.lorri.enable = true;
