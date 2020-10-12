@@ -11,9 +11,7 @@
           port = 6697;
           autoConnect = true;
         };
-        channels = {
-          nixos.autoJoin = true;
-        };
+        channels = { nixos.autoJoin = true; };
       };
     };
   };

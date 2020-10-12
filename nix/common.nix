@@ -1,13 +1,8 @@
-
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ./gpg.nix ./dev
-    ./shells.nix ./terminal.nix
-    ./gui.nix
-    ./email.nix ./irc.nix
-  ];
+  imports =
+    [ ./gpg.nix ./dev ./shells.nix ./terminal ./gui.nix ./email ./irc.nix ];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -22,12 +17,7 @@
       LEDGER_FILE = "${config.home.homeDirectory}/org/personal.journal";
     };
 
-    packages = with pkgs; [
-      hledger
-      noto-fonts
-      openconnect
-      mpv
-    ];
+    packages = with pkgs; [ hledger noto-fonts openconnect mpv ];
   };
 
   programs.feh.enable = true;
@@ -36,14 +26,14 @@
 
   xdg.userDirs = {
     enable = true;
-    desktop = "\$HOME/desktop";
-    videos = "\$HOME/videos";
-    music = "\$HOME/music";
-    download = "\$HOME/downloads";
-    documents = "\$HOME/documents";
-    pictures = "\$HOME/pictures";
-    publicShare = "\$HOME/public";
-    templates = "\$HOME/templates";
+    desktop = "$HOME/desktop";
+    videos = "$HOME/videos";
+    music = "$HOME/music";
+    download = "$HOME/downloads";
+    documents = "$HOME/documents";
+    pictures = "$HOME/pictures";
+    publicShare = "$HOME/public";
+    templates = "$HOME/templates";
   };
 
   # This value determines the Home Manager release that your

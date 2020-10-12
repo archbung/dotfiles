@@ -4,9 +4,7 @@
   programs.gpg.enable = true;
 
   home = {
-    sessionVariables = {
-      GPG_TTY = "$(tty)";
-    };
+    sessionVariables = { GPG_TTY = "$(tty)"; };
 
     packages = with pkgs; [ gcr ];
   };
@@ -15,9 +13,8 @@
     enable = true;
     enableSshSupport = true;
     pinentryFlavor = "gnome3";
-    extraConfig =
-      ''
+    extraConfig = ''
       allow-loopback-pinentry
-      '';
+    '';
   };
 }

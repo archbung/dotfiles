@@ -1,16 +1,12 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ../common
-    ./hardware-configuration.nix
-  ];
+  imports = [ ../common ./hardware-configuration.nix ];
 
-  networking.hostname = "goedel";
+  networking.hostName = "goedel";
   networking.networkmanager = {
-      enable = true;
-      wifi.powersave = true;
-    };
+    enable = true;
+    wifi.powersave = true;
   };
 
   programs.light.enable = true;
@@ -41,7 +37,8 @@
   services.upower.enable = true;
 
   users.users.archbung.extraGroups = [
-    "networkmanager" "video"  # Enable setting backlight via `light`
+    "networkmanager"
+    "video" # Enable setting backlight via `light`
   ];
 
   home-manager.users.archbung = ./goedel.nix;

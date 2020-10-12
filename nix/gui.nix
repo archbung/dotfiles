@@ -1,16 +1,12 @@
 { config, pkgs, lib, ... }:
 
-let xmonad = pkgs.callPackage ./lib/xmonad {};
-in
-{
+let xmonad = pkgs.callPackage ./lib/xmonad { nixpkgs = pkgs; };
+in {
   home = {
-    packages = with pkgs; [
-      dmenu xclip pulsemixer i3lock
-    ] ++ [ xmonad ];
+    packages = with pkgs; [ dmenu xclip pulsemixer i3lock ] ++ [ xmonad ];
 
     file.xinitrc = {
-      text =
-        ''
+      text = ''
         if test -z "$DBUS_SESSION_BUS_ADDRESS"; then
           eval $(dbus-launch --exit-with-session --sh-syntax)
         fi
@@ -21,7 +17,7 @@ in
         fi
 
         exec xmonad
-        '';
+      '';
       target = ".xinitrc";
     };
   };

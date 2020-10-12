@@ -1,41 +1,32 @@
 { config, pkgs, ... }:
 
-let shellAliases = {
-      ls = "${pkgs.exa}/bin/exa";
-      ll = "${pkgs.exa}/bin/exa -l";
-      cp = "cp --reflink=auto";
-    };
-in
-{
+let
+  shellAliases = {
+    ls = "${pkgs.exa}/bin/exa";
+    ll = "${pkgs.exa}/bin/exa -l";
+    cp = "cp --reflink=auto";
+  };
+in {
   home = {
-    sessionVariables = {
-      EDITOR = "${pkgs.neovim}/bin/nvim";
-    };
+    sessionVariables = { EDITOR = "${pkgs.neovim}/bin/nvim"; };
 
-    packages = with pkgs; [
-      exa ranger
-    ];
+    packages = with pkgs; [ exa ranger ];
 
   };
 
-  programs.autojump.enable = true;  # Autojump enables bash integration by default
+  programs.autojump.enable =
+    true; # Autojump enables bash integration by default
 
   programs.bat.enable = true;
 
   programs.bash = {
     enable = true;
 
-    historyControl = [
-      "ignoredups" "erasedups"
-    ];
+    historyControl = [ "ignoredups" "erasedups" ];
 
-    historyIgnore = [
-      "ll" "ls" "cd"
-    ];
+    historyIgnore = [ "ll" "ls" "cd" ];
 
-    shellOptions = [
-      "histappend" "checkjobs"
-    ];
+    shellOptions = [ "histappend" "checkjobs" ];
 
     inherit shellAliases;
   };
@@ -70,19 +61,19 @@ in
       vi-ins-mode-string = "\\1\\e[6 q\\2";
       vi-cmd-mode-string = "\\1\\e[2 q\\2";
     };
-    extraConfig = 
-    ''$if mode=vi
-        set keymap vi-command
-        "\e[B": history-search-forward
-        "\e[A": history-search-backward
-        j: history-search-forward
-        k: history-search-backward
+    extraConfig = ''
+      $if mode=vi
+              set keymap vi-command
+              "\e[B": history-search-forward
+              "\e[A": history-search-backward
+              j: history-search-forward
+              k: history-search-backward
 
-        set keymap vi-insert
-        "\e[B": history-search-forward
-        "\e[A": history-search-backward
-      $endif
-    '';
+              set keymap vi-insert
+              "\e[B": history-search-forward
+              "\e[A": history-search-backward
+            $endif
+          '';
   };
 
   programs.mcfly = {

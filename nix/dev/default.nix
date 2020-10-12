@@ -1,18 +1,9 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ./neovim
-    ./texlive
-    ./haskell.nix
-    ./emacs.nix
-  ];
+  imports = [ ./neovim ./texlive ./emacs ./haskell.nix ];
 
-  home.packages = with pkgs; [
-    niv cachix
-    shellcheck
-    terraform
-  ];
+  home.packages = with pkgs; [ niv cachix shellcheck terraform ];
 
   programs.direnv = {
     enable = true;
@@ -25,13 +16,13 @@
     userEmail = "archbung@gmail.com";
     userName = "Hizbullah Abdul Aziz Jabbar";
     aliases = {
-        co = "checkout";
-        ci = "commit";
-        st = "status";
-        br = "branch";
-        hist = "log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short";
-        type = "cat-file -t";
-        dump = "cat-file -p";
+      co = "checkout";
+      ci = "commit";
+      st = "status";
+      br = "branch";
+      hist = "log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short";
+      type = "cat-file -t";
+      dump = "cat-file -p";
     };
 
     signing = {
@@ -39,9 +30,7 @@
       signByDefault = true;
     };
 
-    extraConfig = {
-      core.editor = "${pkgs.neovim}/bin/nvim";
-    };
+    extraConfig = { core.editor = "${pkgs.neovim}/bin/nvim"; };
 
   };
 

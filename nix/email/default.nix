@@ -1,8 +1,7 @@
 { config, pkgs, ... }:
 
 let realName = "Hizbullah Abdul Aziz Jabbar";
-in
-{
+in {
   accounts.email = {
     maildirBasePath = "mail";
     accounts.gmail = {
@@ -17,7 +16,12 @@ in
         create = "both";
         expunge = "both";
         patterns = [
-          "*" "![Gmail]*" "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail" "[Gmail]/Drafts"
+          "*"
+          "![Gmail]*"
+          "[Gmail]/Sent Mail"
+          "[Gmail]/Starred"
+          "[Gmail]/All Mail"
+          "[Gmail]/Drafts"
         ];
       };
       msmtp.enable = true;
@@ -32,8 +36,7 @@ in
   programs.notmuch = {
     enable = true;
     hooks = {
-      postNew =
-        ''
+      postNew = ''
         notmuch tag +job +promotion -inbox -- tag:inbox and from:noreply@glassdoor.com
         notmuch tag +play +promotion -inbox -- tag:inbox and from:noreply@steampowered.com
         notmuch tag +promotion -inbox -- tag:inbox and from:"/@wg-gesucht.de/" or from:"/@members.babbel.com/" or from:"/@amazon.com/"
@@ -48,23 +51,18 @@ in
         notmuch tag +nix +forum -inbox -- tag:inbox and from:nixos1@discoursemail.com
         notmuch tag +ledger +forum -inbox -- tag:inbox and from:ledger-cli@googlegroups.com or to:ledger-cli@googlegroups.com
         notmuch tag +tamarin +forum -inbox -- tag:inbox and from:tamarin-prover@googlegroups.com or to:tamarin-prover@googlegroups.com
-        '';
+      '';
       preNew = "mbsync --all";
     };
   };
 
-  programs.neomutt = {
-    enable = true;
-  };
+  programs.neomutt = { enable = true; };
 
   programs.password-store.enable = true;
 
   home = {
     packages = with pkgs; [ w3m ];
 
-    file.neomutt = {
-      source = ./lib/neomutt;
-      target = ".config/neomutt";
-    };
+    file."config/neomutt".source = ./neomutt;
   };
-} 
+}

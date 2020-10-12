@@ -1,14 +1,11 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot = {
-    initrd.availableKernelModules = [
-      "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"
-    ];
+    initrd.availableKernelModules =
+      [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
     initrd.kernelModules = [ "i915" ];
 
     kernelModules = [ "kvm-intel" "acpi_call" ];
@@ -19,7 +16,10 @@
     cpu.intel.updateMicrocode = config.hardware.enableRedistributableFirmware;
 
     opengl.extraPackages = with pkgs; [
-      vaapiIntel vaapiVdpau libvdpau-va-gl intel-media-driver
+      vaapiIntel
+      vaapiVdpau
+      libvdpau-va-gl
+      intel-media-driver
     ];
 
     trackpoint = {
@@ -28,23 +28,23 @@
     };
   };
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-label/nixos";
-      fsType = "btrfs";
-      options = [ "subvol=nixos" ];
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-label/nixos";
+    fsType = "btrfs";
+    options = [ "subvol=nixos" ];
+  };
 
-  fileSystems."/home" =
-    { device = "/dev/disk/by-label/nixos";
-      fsType = "btrfs";
-      options = [ "subvol=home" "nosuid" "nodev" ];
-    };
+  fileSystems."/home" = {
+    device = "/dev/disk/by-label/nixos";
+    fsType = "btrfs";
+    options = [ "subvol=home" "nosuid" "nodev" ];
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-label/esp";
-      fsType = "vfat";
-      options = [ "nosuid" "nodev" "noexec" ];
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-label/esp";
+    fsType = "vfat";
+    options = [ "nosuid" "nodev" "noexec" ];
+  };
 
   swapDevices = [ ];
 

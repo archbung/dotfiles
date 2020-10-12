@@ -5,9 +5,7 @@
 { config, pkgs, ... }:
 
 {
-  boot.kernel.sysctl = {
-    "vm.swappiness" = 1;
-  };
+  boot.kernel.sysctl = { "vm.swappiness" = 1; };
 
   boot.loader.systemd-boot = {
     enable = true;
@@ -82,7 +80,7 @@
 
   # Enable the X11 windowing system.
   services.xserver = {
-    enable = true;  # Also enables hardware.opengl
+    enable = true; # Also enables hardware.opengl
 
     layout = "us";
     xkbOptions = "eurosign:e,ctrl:nocaps";
@@ -101,9 +99,7 @@
 
   users.users.archbung = {
     isNormalUser = true;
-    extraGroups = [
-      "wheel"
-    ];
+    extraGroups = [ "wheel" ];
   };
 
   # This value determines the NixOS release from which the default
@@ -116,10 +112,9 @@
 
   nix = {
     package = pkgs.nixFlakes;
-    extraOptions =
-      ''
+    extraOptions = ''
       experimental-features = nix-command flakes
-      '';
+    '';
     autoOptimiseStore = true;
     trustedUsers = [ "@wheel" "archbung" ];
   };

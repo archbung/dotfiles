@@ -3,20 +3,24 @@
 {
   home = {
     packages = with pkgs; [
-      stack cabal2nix cabal-install nix-prefetch-git ghcid
-      hlint stylish-haskell
+      stack
+      cabal2nix
+      cabal-install
+      nix-prefetch-git
+      ghcid
+      hlint
+      stylish-haskell
     ];
 
     file.stack-config = {
-      text =
-        ''
+      text = ''
         templates:
           params:
             author-email: archbung@gmail.com
             author-name: Hizbullah Abdul Aziz Jabbar
             copyright: 'Copyright (c) 2020 Hizbullah Abdul Aziz Jabbar'
             github-username: archbung
-        '';
+      '';
       target = ".stack/config.yaml";
     };
   };
