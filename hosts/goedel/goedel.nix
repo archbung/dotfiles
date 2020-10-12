@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ../../nix/common.nix
+  ];
+
   home.packages = with pkgs; [
     zoom-us
     networkmanagerapplet stalonetray
@@ -21,7 +25,7 @@
   };
 
   programs.chromium.enable = true;
-  
+
   services.grobi = {
     enable = true;
     rules = [

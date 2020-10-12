@@ -1,6 +1,9 @@
-{ nixpkgs ? import <nixpkgs> {}, compiler ? "default", doBenchmark ? false }:
+#{ nixpkgs ? import <nixpkgs> {}, compiler ? "default", doBenchmark ? false }:
+{ compiler ? "default", doBenchmark ? false }:
 
 let
+  sources = import ./nix/sources.nix;
+  nixpkgs = import sources.nixpkgs {};
 
   inherit (nixpkgs) pkgs;
 

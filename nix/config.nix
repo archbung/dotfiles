@@ -6,4 +6,8 @@
       inherit pkgs;
     };
   };
+
+  permittedInsecurePackages = [
+    "spidermonkey-38.8.0"
+  ];
 }

@@ -2,15 +2,11 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ 
+  imports = [
     ./gpg.nix ./dev
     ./shells.nix ./terminal.nix
     ./gui.nix
     ./email.nix ./irc.nix
-
-    # Uncomment the appropriate option
-    ./heisenberg.nix
-    #./goedel.nix
   ];
 
   # Let Home Manager install and manage itself.
@@ -26,10 +22,10 @@
       LEDGER_FILE = "${config.home.homeDirectory}/org/personal.journal";
     };
 
-    packages = with pkgs; [ 
+    packages = with pkgs; [
       hledger
       noto-fonts
-      openconnect 
+      openconnect
       mpv
     ];
   };

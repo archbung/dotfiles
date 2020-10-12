@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let xmonad = pkgs.callPackage ./lib/xmonad {};
 in
@@ -26,7 +26,7 @@ in
     };
   };
 
-  fonts.fontconfig.enable = true;
+  fonts.fontconfig.enable = lib.mkDefault true;
 
   xsession.enable = true;
   xsession.windowManager.command = "${xmonad}/bin/xmonad";
