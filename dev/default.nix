@@ -3,14 +3,15 @@
 {
   imports = [
     ./neovim
+    ./vscode
     ./texlive
     ./haskell.nix
-    ./emacs.nix
+    ./emacs
   ];
 
   home.packages = with pkgs; [
     niv cachix
-    shellcheck
+    shellcheck nixfmt
     terraform
   ];
 
@@ -33,6 +34,8 @@
         type = "cat-file -t";
         dump = "cat-file -p";
     };
+
+    delta.enable = true;
 
     signing = {
       key = "0xC2FCAFB1282DB020";
