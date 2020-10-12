@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
-
 let xmonad = pkgs.callPackage ./lib/xmonad { nixpkgs = pkgs; };
-in {
+in
+{
   home = {
     packages = with pkgs; [ dmenu xclip pulsemixer i3lock ] ++ [ xmonad ];
 

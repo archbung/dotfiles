@@ -1,12 +1,12 @@
 { config, pkgs, ... }:
-
 let
   shellAliases = {
     ls = "${pkgs.exa}/bin/exa";
     ll = "${pkgs.exa}/bin/exa -l";
     cp = "cp --reflink=auto";
   };
-in {
+in
+{
   home = {
     sessionVariables = { EDITOR = "${pkgs.neovim}/bin/nvim"; };
 
@@ -73,7 +73,7 @@ in {
               "\e[B": history-search-forward
               "\e[A": history-search-backward
             $endif
-          '';
+    '';
   };
 
   programs.mcfly = {

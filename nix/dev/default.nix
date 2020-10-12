@@ -3,7 +3,7 @@
 {
   imports = [ ./neovim ./texlive ./emacs ./haskell.nix ];
 
-  home.packages = with pkgs; [ niv cachix shellcheck terraform ];
+  home.packages = with pkgs; [ niv cachix shellcheck nixpkgs-fmt terraform ];
 
   programs.direnv = {
     enable = true;
@@ -24,6 +24,8 @@
       type = "cat-file -t";
       dump = "cat-file -p";
     };
+
+    delta.enable = true;
 
     signing = {
       key = "0xC2FCAFB1282DB020";

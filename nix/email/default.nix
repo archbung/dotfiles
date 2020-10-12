@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
-
 let realName = "Hizbullah Abdul Aziz Jabbar";
-in {
+in
+{
   accounts.email = {
     maildirBasePath = "mail";
     accounts.gmail = {
@@ -63,6 +63,6 @@ in {
   home = {
     packages = with pkgs; [ w3m ];
 
-    file."config/neomutt".source = ./neomutt;
+    file.".config/neomutt".source = ./neomutt;
   };
 }

@@ -15,7 +15,8 @@
       hostNames = [ "heisenberg" "goedel" ];
       forAllHostNames = f:
         nixpkgs.lib.genAttrs hostNames (hostName: f hostName);
-    in {
+    in
+    {
       nixosConfigurations = forAllHostNames (hostName:
         let
           system = "x86_64-linux";
@@ -35,6 +36,8 @@
             hm-nixos-as-super
             (./hosts + "/${hostName}")
           ];
-        in nixpkgs.lib.nixosSystem { inherit system modules specialArgs; });
+
+        in
+        nixpkgs.lib.nixosSystem { inherit system modules specialArgs; });
     };
 }

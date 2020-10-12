@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
-
 let firefox = pkgs.firefox-beta-bin;
-in {
+in
+{
   imports = [ ../../nix/common.nix ];
 
   home = {
