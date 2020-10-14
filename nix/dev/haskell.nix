@@ -7,7 +7,6 @@
       cabal2nix
       cabal-install
       nix-prefetch-git
-      ghcid
       hlint
       stylish-haskell
     ];

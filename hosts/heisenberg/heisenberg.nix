@@ -7,7 +7,7 @@ in
   home = {
     sessionVariables = { BROWSER = "${firefox}/bin/firefox"; };
 
-    packages = with pkgs; [ steam ];
+    packages = with pkgs; [ steam zoom-us ];
   };
 
   programs.firefox = {

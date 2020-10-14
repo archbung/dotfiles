@@ -39,14 +39,14 @@ in
       postNew = ''
         notmuch tag +job +promotion -inbox -- tag:inbox and from:noreply@glassdoor.com
         notmuch tag +play +promotion -inbox -- tag:inbox and from:noreply@steampowered.com
-        notmuch tag +promotion -inbox -- tag:inbox and from:"/@wg-gesucht.de/" or from:"/@members.babbel.com/" or from:"/@amazon.com/"
+        notmuch tag +promotion -inbox -- tag:inbox and from:"/@wg-gesucht.de/" or from:"/@members.babbel.com/"
+        notmuch tag +amazon -inbox -- tag:inbox and from:"/@amazon.com/" or from:"/@amazon.de/" or from:"/@*.myhermes.de/"
         notmuch tag +newsletter -inbox -- tag:inbox and from:"/@readdlenews.com/" or from:"/@eatthismuch.com/"
         notmuch tag +trash -inbox -- tag:inbox and from:"/@mail.instagram.com/"
         notmuch tag +trash -inbox -- tag:inbox and from:"/@facebookmail.com/"
-        notmuch tag +work -inbox -- tag:inbox and from:"/@cispa.saarland/"
+        notmuch tag +work -inbox -- tag:inbox and from:"/@cispa.saarland/" or from:"/cispa.de/"
         notmuch tag +school -inbox -- tag:inbox and from:"/uni-saarland.de/"
         notmuch tag +github -inbox -- tag:inbox and from:"/@github.com/"
-        notmuch tag -inbox -- from:archbung@gmail.com
         notmuch tag +pandoc +forum -inbox -- tag:inbox and from:pandoc-discuss@googlegroups.com or to:pandoc-discuss@googlegroups.com
         notmuch tag +nix +forum -inbox -- tag:inbox and from:nixos1@discoursemail.com
         notmuch tag +ledger +forum -inbox -- tag:inbox and from:ledger-cli@googlegroups.com or to:ledger-cli@googlegroups.com
