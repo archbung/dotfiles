@@ -98,6 +98,8 @@
 
   services.fstrim.enable = true;
 
+  services.chrony.enable = true;
+
   users.users.archbung = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];

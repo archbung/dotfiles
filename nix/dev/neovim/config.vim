@@ -121,6 +121,8 @@ nnoremap <leader>fr :History<CR>
 nnoremap <leader>bb :Buffers<CR>
 nnoremap <leader>sr :Rg<CR>
 
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gp :Gpush<CR>
 
 "
 " Autocmd
