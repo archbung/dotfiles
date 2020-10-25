@@ -1,4 +1,4 @@
-# 
+#
 # Basic settings
 #
 set header_cache = '/home/archbung/.cache/neomutt/headers'
@@ -12,7 +12,7 @@ set sort_aux = reverse-last-date-received
 set sort_browser = date
 set pager_context = 3
 set edit_headers = yes
-set mailcap_path = "~/.mutt/mailcap"
+set mailcap_path = "~/.config/neomutt/mailcap"
 
 set date_format = "%y-%m-%d %T"
 #set index_format = "%2C | %Z [%d] %-30.30F (%-4.4c) %s"

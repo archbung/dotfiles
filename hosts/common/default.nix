@@ -13,6 +13,7 @@
   };
 
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.supportedFilesystems = [ "btrfs" "ntfs" ];
   hardware.enableRedistributableFirmware = true;
 
   # Configure network proxy if necessary

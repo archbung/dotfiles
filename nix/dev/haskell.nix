@@ -8,6 +8,7 @@
       cabal-install
       nix-prefetch-git
       hlint
+      ghcid
       stylish-haskell
     ];
 

@@ -37,6 +37,7 @@ in
     enable = true;
     hooks = {
       postNew = ''
+        notmuch tag -inbox -- tag:inbox and from:archbung@gmail.com or from:s8hijabb@stud.uni-saarland.de
         notmuch tag +job +promotion -inbox -- tag:inbox and from:noreply@glassdoor.com
         notmuch tag +play +promotion -inbox -- tag:inbox and from:noreply@steampowered.com
         notmuch tag +promotion -inbox -- tag:inbox and from:"/@wg-gesucht.de/" or from:"/@members.babbel.com/"

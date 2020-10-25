@@ -9,9 +9,10 @@
   networking.wireless = {
     enable = true;
     networks = {
-      "o2-WLAN33" = {
+      "Studenten-WG" = {
         pskRaw =
-          "cffc437ab93ce7ca79e0437523a09469a5072e947869cfcb20d7706a7a3aa330";
+          "6fda6fd7e016941b52ba5e466f28fef52d2ecdebf84327b907110ca96c378926";
+        priority = 50;
       };
     };
   };

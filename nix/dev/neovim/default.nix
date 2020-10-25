@@ -28,6 +28,7 @@
         onedark-vim
         lightline-vim
         gv-vim
+        vim-orgmode
       ];
     };
   };

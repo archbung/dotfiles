@@ -287,7 +287,7 @@ Set `SSH_AUTH_SOCK`, `SSH_AGENT_PID`, and `GPG_AGENT` in Emacs'
   (setq org-enforce-todo-dependencies t
         org-return-follows-link t
         org-todo-keywords
-        '((sequence "TODO(t)" "VERIFY(v@/!)" "|" "DONE(d!)" "CANCELED(c@)"))
+        '((sequence "TODO(t)" "IN PROGRESS(i)" "POSTPONED(p)" "VERIFY(v@/!)" "|" "DONE(d!)" "CANCELED(c@)"))
         org-capture-templates
         '(("t" "Todo" entry (file+headline "~/org/inbox.org" "Inbox")
            "* TODO %?\n %i %a")
