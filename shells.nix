@@ -2,8 +2,9 @@
 
 let shellAliases = {
       ls = "${pkgs.exa}/bin/exa";
-      ll = "${pkgs.exa}/bin/exa -l";
+      ll = "${pkgs.exa}/bin/exa -lh";
       cp = "cp --reflink=auto";
+      vi = "nvim";
     };
 in
 {

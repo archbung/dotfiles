@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 
-let xmonad = pkgs.callPackage ./lib/xmonad {};
+let xmonad = import ./lib/xmonad;
 in
 {
   home = {

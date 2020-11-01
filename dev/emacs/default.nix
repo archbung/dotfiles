@@ -13,16 +13,14 @@ in
 {
   home = {
     packages = with pkgs; [
-      ripgrep fd clang
-    ] ++ [ doom-emacs ];
+      ripgrep fd clang doom-emacs
+    ];
 
     file.".emacs.d/init.el".text =
       ''
       (load "default.el")
       '';
   };
-
-  programs.emacs.enable = true;
 
   services.emacs.socketActivation.enable = true;
 }
