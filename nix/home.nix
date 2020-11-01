@@ -28,6 +28,11 @@
       LEDGER_FILE = "${config.home.homeDirectory}/org/personal.journal";
     };
 
+    file.config-nix = {
+      source = ./config.nix;
+      target = ".config/nixpkgs/config.nix";
+    };
+
     packages = with pkgs; [ hledger noto-fonts openconnect mpv ];
   };
 
