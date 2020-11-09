@@ -96,7 +96,7 @@ let g:UltiSnipsJumpBackwardTrigger = "<C-b>"
 " Ale
 let g:ale_fixers = {
       \   '*': [ 'remove_trailing_lines', 'trim_whitespace' ],
-      \   'haskell': [ 'stylish-haskell' ],
+      \   'haskell': [ 'brittany' ],
       \ }
 let g:ale_fix_on_save = 1
 
