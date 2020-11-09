@@ -1,5 +1,6 @@
 { config, pkgs, ... }:
 
+# FIXME: Modify doom-emacs to use emacsGit
 let doom-emacs = pkgs.callPackage (builtins.fetchTarball "https://github.com/vlaci/nix-doom-emacs/archive/master.tar.gz")
     {
       doomPrivateDir = ./doom;
@@ -13,13 +14,14 @@ in
 {
   home = {
     packages = with pkgs; [
-      ripgrep fd clang doom-emacs
+      ripgrep fd clang emacsGit
     ];
 
-    file.".emacs.d/init.el".text =
-      ''
-      (load "default.el")
-      '';
+    sessionVariables = {
+      DOOMDIR = "${config.home.homeDirectory}/.config/doom";
+    };
+
+    file.".config/doom".source = ./doom;
   };
 
   services.emacs.socketActivation.enable = true;
