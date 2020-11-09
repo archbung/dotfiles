@@ -38,16 +38,17 @@ in
     hooks = {
       postNew = ''
         notmuch tag -inbox -- tag:inbox and from:archbung@gmail.com or from:s8hijabb@stud.uni-saarland.de
-        notmuch tag +job +promotion -inbox -- tag:inbox and from:noreply@glassdoor.com
-        notmuch tag +play +promotion -inbox -- tag:inbox and from:noreply@steampowered.com
-        notmuch tag +promotion -inbox -- tag:inbox and from:"/@wg-gesucht.de/" or from:"/@members.babbel.com/"
-        notmuch tag +amazon -inbox -- tag:inbox and from:"/@amazon.com/" or from:"/@amazon.de/" or from:"/@*.myhermes.de/"
-        notmuch tag +newsletter -inbox -- tag:inbox and from:"/@readdlenews.com/" or from:"/@eatthismuch.com/"
-        notmuch tag +trash -inbox -- tag:inbox and from:"/@mail.instagram.com/"
-        notmuch tag +trash -inbox -- tag:inbox and from:"/@facebookmail.com/"
+        notmuch tag +job +promotion -inbox -- tag:inbox and from:"/@*glassdoor.com/" or from:"/@*devpost.com/"
+        notmuch tag +play +promotion -inbox -- tag:inbox and from:noreply@steampowered.com or from:"/@*reddit.com/"
+        notmuch tag +fitness +promotion -inbox -- tag:inbox and from:"/@*zerofasting.com/" or from:"/@*nike.com/" or from:"/@jameda.de/"
+        notmuch tag +promotion -inbox -- tag:inbox and from:"/@wg-gesucht.de/" or from:"/@members.babbel.com/" or from:"/@*headspace.com/" or from:"/@*any.do/" or from:"/@*zerofasting.com/"
+        notmuch tag +banking -inbox -- tag:inbox and from:"/n26.com/" or from:"/@*paypal.de/"
+        notmuch tag +shopping -inbox -- tag:inbox and from:"/@*amazon.*/" or from:"/@*myhermes.de/" or from:"/@*saturn.de/"
+        notmuch tag +newsletter -inbox -- tag:inbox and from:"/@*readdlenews.com/" or from:"/@*eatthismuch.com/" or from:"/@*sleepycycle.com/"
+        notmuch tag +trash -inbox -- tag:inbox and from:"/@mail.instagram.com/" or from:"/@facebookmail.com/" or from:"/@*gotinder.com/"
         notmuch tag +work -inbox -- tag:inbox and from:"/@cispa.saarland/" or from:"/cispa.de/"
         notmuch tag +school -inbox -- tag:inbox and from:"/uni-saarland.de/"
-        notmuch tag +github -inbox -- tag:inbox and from:"/@github.com/"
+        notmuch tag +git -inbox -- tag:inbox and from:"/@github.com/" or from:"/@gitlab*/"
         notmuch tag +pandoc +forum -inbox -- tag:inbox and from:pandoc-discuss@googlegroups.com or to:pandoc-discuss@googlegroups.com
         notmuch tag +nix +forum -inbox -- tag:inbox and from:nixos1@discoursemail.com
         notmuch tag +ledger +forum -inbox -- tag:inbox and from:ledger-cli@googlegroups.com or to:ledger-cli@googlegroups.com
@@ -64,6 +65,6 @@ in
   home = {
     packages = with pkgs; [ w3m ];
 
-    file.".config/neomutt".source = ./lib/neomutt;
+    file.".config/neomutt".source = ./neomutt;
   };
 }

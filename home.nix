@@ -6,7 +6,7 @@
     ./gpg.nix ./dev
     ./shells.nix ./terminal.nix
     ./gui.nix
-    ./email.nix ./irc.nix
+    ./email ./irc.nix
 
     # Uncomment the appropriate option
     ./heisenberg.nix
