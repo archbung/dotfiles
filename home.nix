@@ -2,10 +2,10 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ 
+  imports = [
     ./gpg.nix ./dev
-    ./shells.nix ./terminal.nix
-    ./gui.nix
+    ./shells.nix ./terminal
+    ./gui
     ./email ./irc.nix
 
     # Uncomment the appropriate option
@@ -26,10 +26,10 @@
       LEDGER_FILE = "${config.home.homeDirectory}/org/personal.journal";
     };
 
-    packages = with pkgs; [ 
+    packages = with pkgs; [
       hledger
       noto-fonts
-      openconnect 
+      openconnect
       mpv
     ];
   };

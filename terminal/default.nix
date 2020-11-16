@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let baseSettings = { font_size = 12; };
-    colorScheme = import ./lib/kitty/onedark.nix;
+    colorScheme = import ./kitty/onedark.nix;
     settings = baseSettings // colorScheme;
 in
 {

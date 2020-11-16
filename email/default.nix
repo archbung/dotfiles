@@ -53,6 +53,7 @@ in
         notmuch tag +nix +forum -inbox -- tag:inbox and from:nixos1@discoursemail.com
         notmuch tag +ledger +forum -inbox -- tag:inbox and from:ledger-cli@googlegroups.com or to:ledger-cli@googlegroups.com
         notmuch tag +tamarin +forum -inbox -- tag:inbox and from:tamarin-prover@googlegroups.com or to:tamarin-prover@googlegroups.com
+        notmuch tag +haskell +forum -inbox -- tag:inbox and from:"/@haskell.org/" or to:"/@haskell.org/"
       '';
       preNew = "mbsync --all";
     };
