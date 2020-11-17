@@ -96,9 +96,8 @@ let g:UltiSnipsJumpBackwardTrigger = "<C-b>"
 " Ale
 let g:ale_fixers = {
       \   '*': [ 'remove_trailing_lines', 'trim_whitespace' ],
-      \   'haskell': [ 'brittany' ],
+      \   'haskell': [ 'stylish-haskell' ],
       \ }
-let g:ale_fix_on_save = 1
 
 let g:ale_linters = {
       \   'haskell': [ 'hlint' ],
@@ -119,6 +118,9 @@ nnoremap <leader>ff :Files<CR>
 nnoremap <leader>fr :History<CR>
 nnoremap <leader>bb :Buffers<CR>
 nnoremap <leader>sr :Rg<CR>
+nnoremap <leader>gs :Gstatus<CR>
+
+nnoremap <localleader>f :ALEFix<CR>
 
 
 "

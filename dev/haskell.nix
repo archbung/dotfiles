@@ -4,7 +4,7 @@
   home = {
     packages = with pkgs; [
       stack cabal2nix cabal-install nix-prefetch-git ghcid
-      hlint britany
+      hlint stylish-haskell
     ];
 
     file.stack-config = {
