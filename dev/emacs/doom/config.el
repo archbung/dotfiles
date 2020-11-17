@@ -35,6 +35,11 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
+(after! evil
+  (setq evil-want-abbrev-expand-on-insert-exit nil))
+
+(after! company-coq
+  (setq company-coq-disabled-features '(smart-subscripts prettify-symbols)))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
