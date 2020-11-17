@@ -1,5 +1,5 @@
 
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports = [
@@ -24,6 +24,17 @@
 
     sessionVariables = {
       LEDGER_FILE = "${config.home.homeDirectory}/org/personal.journal";
+    };
+
+    activation = {
+      disableCOW = lib.hm.dag.entryAfter ["writeBoundary"]
+      ''
+        $DRY_RUN_CMD mkdir -p $VERBOSE_ARG \
+          $HOME/{downloads,.local/share/Steam}
+
+        $DRY_RUN_CMD chattr +C $VERBOSE_ARG \
+          $HOME/{downloads,.local/share/Steam}
+      '';
     };
 
     packages = with pkgs; [
