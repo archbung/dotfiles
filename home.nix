@@ -30,7 +30,10 @@
       disableCOW = lib.hm.dag.entryAfter ["writeBoundary"]
       ''
         $DRY_RUN_CMD mkdir -p $VERBOSE_ARG \
-          $HOME/{downloads,.local/share/Steam}
+          $HOME/{downloads,.local/share/Steam,.ssh,.gnupg}
+
+        $DRY_RUN_CMD chmod 700 $VERBOSE_ARG \
+          $HOME/{.ssh,.gnupg}
 
         $DRY_RUN_CMD chattr +C $VERBOSE_ARG \
           $HOME/{downloads,.local/share/Steam}

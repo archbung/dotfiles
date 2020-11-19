@@ -11,7 +11,7 @@
 
   home.packages = with pkgs; [
     niv cachix
-    shellcheck nixfmt
+    shellcheck nixpkgs-fmt
     terraform
   ];
 

@@ -35,14 +35,16 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
-;; company-coq tweaks
+;; Coq tweaks
 (after! evil
   (setq evil-want-abbrev-expand-on-insert-exit nil))
 
 (after! company-coq
   (setq company-coq-disabled-features '(smart-subscripts prettify-symbols)))
 
-;; latex
+(setq coq-compile-before-require t)
+
+;; Latex
 (setq +latex-viewers '(zathura))
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
