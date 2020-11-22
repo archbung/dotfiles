@@ -17,7 +17,7 @@ set from='archbung@gmail.com'
 set postponed='+[Gmail]/Drafts'
 set realname='Hizbullah Abdul Aziz Jabbar'
 #set record='notmuch://?query=tag:sent'
-set record='+[Gmail]/Sent'
+set record='+[Gmail]/Sent Mail'
 set spoolfile="notmuch://?query=tag:inbox"
 #set spoolfile='+inbox'
 set trash='+[Gmail]/Trash'

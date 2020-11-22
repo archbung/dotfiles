@@ -1,39 +1,45 @@
 " vim:set ts=2 sts=2 sw=2 et:
 "
-" Basic settings
-"
-set scrolloff=5
-set noshowmode
-set splitright splitbelow
-set cpoptions+=J
-set hidden
-set nobackup
-set nowritebackup
-set cmdheight=2
-set updatetime=300
-set shortmess+=c
-set signcolumn=yes
-
-set noswapfile
-set nobackup
-set nowritebackup
-
-" Colors
-set termguicolors
-colorscheme onedark
-
-
-"
 " Plugins
 "
-" Polyglot
-let g:haskell_enable_quantification = 1
-let g:haskell_enable_recursivedo = 1
-let g:haskell_classic_highlighting = 1
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-" FZF
+call plug#begin('~/.config/nvim/bundle')
+
+" Essentials
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'junegunn/vim-plug'
+
+" Finding things
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 let g:fzf_buffers_jump = 1
+let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 let $FZF_DEFAULT_OPTS = "--layout=reverse"
+
+function! FloatingFZF()
+  let buf = nvim_create_buf(v:false, v:true)
+  call setbufvar(buf, '&signcolumn', 'no')
+
+  let height = &lines - 3
+  let width = float2nr(&columns - (&columns * 2 / 10))
+  let col = float2nr((&columns - width) / 2)
+
+  let opts = {
+        \ 'relative': 'editor',
+        \ 'row': 1,
+        \ 'col': col,
+        \ 'width': width,
+        \ 'height': height,
+        \ }
+  call nvim_open_win(buf, v:true, opts)
+endfunction
 
 command! -bang -nargs=* GGrep
       \ call fzf#vim#grep(
@@ -50,11 +56,37 @@ command! -bang -nargs=* Rg
 command! -bang -nargs=? -complete=dir Files
       \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
-" Vimtex
+Plug 'junegunn/gv.vim'
+Plug 'junegunn/goyo.vim'
+
+Plug 'sheerun/vim-polyglot'
+let g:haskell_classic_highlighting = 1
 let g:tex_flavor = "latex"
 let g:vimtex_view_method = "zathura"
+let g:vimtex_quickfix_mode = 1
 
-" Lightline
+Plug 'dense-analysis/ale'
+let g:ale_fixers = {
+      \   '*': [ 'remove_trailing_lines', 'trim_whitespace' ],
+      \   'haskell': [ 'stylish-haskell' ],
+      \   'nix': [ 'nixpkgs-fmt' ],
+      \ }
+
+let g:ale_linters = {
+      \   'haskell': [ 'hlint' ],
+			\ }
+
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
+let g:UltiSnipsExpandTrigger = "<C-j>"
+let g:UltiSnipsJumpForwardTrigger = "<C-b>"
+let g:UltiSnipsJumpBackwardTrigger = "<C-z>"
+
+Plug 'joshdick/onedark.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'itchyny/lightline.vim'
+Plug 'maximbaz/lightline-ale'
+Plug 'psliwka/vim-smoothie'
 let g:lightline = {
       \ 'colorscheme': 'onedark',
       \ 'active': {
@@ -62,11 +94,11 @@ let g:lightline = {
       \            [ 'gitbranch', 'readonly', 'filename', ]],
       \   'right':
       \     [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok', ],
-      \      [ 'lineinfo' ], [ 'percent' ], [ 'filetype' ]]
+      \      [ 'lineinfo'], [ 'percent' ], [ 'filetype']]
       \   },
       \ 'component_function': {
-      \   'gitbranch': 'fugitve#head',
-      \   'filename': 'LightlineFilename',
+      \   'gitbranch': 'fugitive#head',
+      \   'filename' : 'LightlineFilename',
       \   },
       \ 'component_expand': {
       \   'linter_checking': 'lightline#ale#checking',
@@ -88,21 +120,32 @@ function! LightlineFilename()
   return filename . modified
 endfunction
 
-" Snippets
-let g:UltiSnipsExpandTrigger = "<C-j>"
-let g:UltiSnipsJumpForwardTrigger = "<C-n>"
-let g:UltiSnipsJumpBackwardTrigger = "<C-b>"
+set noshowmode
 
-" Ale
-let g:ale_fixers = {
-      \   '*': [ 'remove_trailing_lines', 'trim_whitespace' ],
-      \   'haskell': [ 'stylish-haskell' ],
-      \   'nix': [ 'nixpkgs-fmt' ],
-      \ }
+call plug#end()
 
-let g:ale_linters = {
-      \   'haskell': [ 'hlint' ],
-			\ }
+
+"
+" Basic settings
+"
+set scrolloff=5
+set splitright splitbelow
+set cpoptions+=J
+set hidden
+set nobackup
+set nowritebackup
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
+set signcolumn=yes
+
+set noswapfile
+set nobackup
+set nowritebackup
+
+" Colors
+set termguicolors
+colorscheme onedark
 
 
 "

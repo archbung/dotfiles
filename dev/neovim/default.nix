@@ -1,25 +1,20 @@
 { config, pkgs, ... }:
 
 {
-  home.file.neovim = {
-    source = ./syntax;
-    target = ".config/nvim/syntax";
+  home.file = {
+    neovim-syntax = {
+      source = ./syntax;
+      target = ".config/nvim/syntax";
+    };
+    neovim-config = {
+      source = ./config.vim;
+      target = ".config/nvim/init.vim";
+    };
   };
 
   programs.neovim = {
     enable = true;
     viAlias = true;
     vimAlias = true;
-    configure = {
-      customRC = builtins.readFile ./config.vim;
-
-      plug.plugins = with pkgs.vimPlugins;
-        [ fugitive sensible vim-polyglot vim-gitgutter nerdtree
-          fzf-vim fzfWrapper
-          ultisnips vim-snippets ale
-          vimtex
-          onedark-vim lightline-vim gv-vim
-        ];
-    };
   };
 }
