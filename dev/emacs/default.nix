@@ -14,7 +14,7 @@ in
 {
   home = {
     packages = with pkgs; [
-      ripgrep fd clang emacsGit
+      ripgrep fd clang emacsUnstable
     ];
 
     sessionVariables = {

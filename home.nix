@@ -41,10 +41,11 @@
     };
 
     packages = with pkgs; [
-      hledger
+      ledger
       noto-fonts
       openconnect
       mpv
+      zoom-us
     ];
   };
 

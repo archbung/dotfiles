@@ -1,5 +1,4 @@
 { config, pkgs, ... }:
-
 let firefox = pkgs.latest.firefox-beta-bin;
 in
 {
@@ -9,7 +8,7 @@ in
     };
 
     packages = with pkgs; [
-      steam
+      #(steam.override { withJava = true; nativeOnly = true; })
     ];
   };
 
