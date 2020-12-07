@@ -10,8 +10,8 @@
   ];
 
   home.packages = with pkgs; [
-    niv cachix
-    shellcheck nixpkgs-fmt
+    niv cachix pandoc
+    shellcheck nixpkgs-fmt nixfmt
     terraform
   ];
 

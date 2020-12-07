@@ -15,6 +15,7 @@ in
   home = {
     packages = with pkgs; [
       ripgrep fd clang emacsUnstable
+      sqlite  # for org-roam
     ];
 
     sessionVariables = {
