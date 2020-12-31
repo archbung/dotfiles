@@ -1,26 +1,39 @@
 { config, pkgs, ... }:
-
-let xmonad = import ./xmonad;
+let dwm = pkgs.dwm.overrideAttrs (oldAttrs: {
+      patches = [ ];
+      configurePhase =
+        ''
+        cp ${./dwm/config.h} config.h
+        '';
+    });
+    xmonad = import ./xmonad;
 in
 {
   home = {
     packages = with pkgs; [
-      dmenu xclip pulsemixer i3lock
-    ] ++ [ xmonad ];
+      dmenu
+      xclip
+      pulsemixer
+      i3lock
+      xmonad
+    ];
 
     file.xinitrc = {
       text =
         ''
-        if test -z "$DBUS_SESSION_BUS_ADDRESS"; then
-          eval $(dbus-launch --exit-with-session --sh-syntax)
-        fi
-        systemctl --user import-environment DISPLAY XAUTHORITY
+          if test -z "$DBUS_SESSION_BUS_ADDRESS"; then
+            eval $(dbus-launch --exit-with-session --sh-syntax)
+          fi
+          systemctl --user import-environment DISPLAY XAUTHORITY
 
-        if command -v dbus-update-activation-environment >/dev/null 2>&1; then
-          dbus-update-activation-environment DISPLAY XAUTHORITY
-        fi
+          if command -v dbus-update-activation-environment >/dev/null 2>&1; then
+            dbus-update-activation-environment DISPLAY XAUTHORITY
+          fi
 
-        exec xmonad
+          xrandr --output DVI-D-0 --primary --orientation left --auto
+          xrandr --output DisplayPort-0 --auto --right-of DVI-D-0
+
+          exec xmonad
         '';
       target = ".xinitrc";
     };

@@ -10,8 +10,12 @@
   ];
 
   home.packages = with pkgs; [
-    niv cachix pandoc
-    shellcheck nixpkgs-fmt nixfmt
+    niv
+    cachix
+    pandoc
+    shellcheck
+    nixpkgs-fmt
+    nixfmt
     terraform
   ];
 
@@ -26,13 +30,13 @@
     userEmail = "archbung@gmail.com";
     userName = "Hizbullah Abdul Aziz Jabbar";
     aliases = {
-        co = "checkout";
-        ci = "commit";
-        st = "status";
-        br = "branch";
-        hist = "log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short";
-        type = "cat-file -t";
-        dump = "cat-file -p";
+      co = "checkout";
+      ci = "commit";
+      st = "status";
+      br = "branch";
+      hist = "log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short";
+      type = "cat-file -t";
+      dump = "cat-file -p";
     };
 
     delta.enable = true;

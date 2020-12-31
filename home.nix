@@ -1,12 +1,14 @@
-
 { config, lib, pkgs, ... }:
 
 {
   imports = [
-    ./gpg.nix ./dev
-    ./shells.nix ./terminal
+    ./gpg.nix
+    ./dev
+    ./shells.nix
+    ./terminal
     ./gui
-    ./email ./irc.nix
+    ./email
+    ./irc.nix
 
     # Uncomment the appropriate option
     ./heisenberg.nix
@@ -27,17 +29,17 @@
     };
 
     activation = {
-      disableCOW = lib.hm.dag.entryAfter ["writeBoundary"]
-      ''
-        $DRY_RUN_CMD mkdir -p $VERBOSE_ARG \
-          $HOME/{downloads,.local/share/Steam,.ssh,.gnupg}
+      disableCOW = lib.hm.dag.entryAfter [ "writeBoundary" ]
+        ''
+          $DRY_RUN_CMD mkdir -p $VERBOSE_ARG \
+            $HOME/{downloads,.local/share/Steam,.ssh,.gnupg}
 
-        $DRY_RUN_CMD chmod 700 $VERBOSE_ARG \
-          $HOME/{.ssh,.gnupg}
+          $DRY_RUN_CMD chmod 700 $VERBOSE_ARG \
+            $HOME/{.ssh,.gnupg}
 
-        $DRY_RUN_CMD chattr +C $VERBOSE_ARG \
-          $HOME/{downloads,.local/share/Steam}
-      '';
+          $DRY_RUN_CMD chattr +C $VERBOSE_ARG \
+            $HOME/{downloads,.local/share/Steam}
+        '';
     };
 
     packages = with pkgs; [

@@ -17,6 +17,7 @@ Plug 'tpope/vim-surround'
 Plug 'junegunn/vim-plug'
 
 " Finding things
+Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 let g:fzf_buffers_jump = 1
@@ -74,7 +75,7 @@ let g:ale_fixers = {
 
 let g:ale_linters = {
       \   'haskell': [ 'hlint' ],
-			\ }
+      \ }
 
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
@@ -159,6 +160,7 @@ tnoremap <C-[> <C-\><C-n>
 
 nnoremap <leader>\ :NERDTreeToggle<CR>
 nnoremap <leader>ff :Files<CR>
+nnoremap <leader>pf :Files<CR>
 nnoremap <leader>fr :History<CR>
 nnoremap <leader>bb :Buffers<CR>
 nnoremap <leader>sr :Rg<CR>

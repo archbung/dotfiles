@@ -1,11 +1,10 @@
 { config, pkgs, ... }:
-
 let shellAliases = {
-      ls = "${pkgs.exa}/bin/exa";
-      ll = "${pkgs.exa}/bin/exa -lh";
-      cp = "cp --reflink=auto";
-      vi = "nvim";
-    };
+  ls = "${pkgs.exa}/bin/exa";
+  ll = "${pkgs.exa}/bin/exa -lh";
+  cp = "cp --reflink=auto";
+  vi = "nvim";
+};
 in
 {
   home = {
@@ -14,12 +13,13 @@ in
     };
 
     packages = with pkgs; [
-      exa ranger
+      exa
+      ranger
     ];
 
   };
 
-  programs.autojump.enable = true;  # Autojump enables bash integration by default
+  programs.autojump.enable = true; # Autojump enables bash integration by default
 
   programs.bat.enable = true;
 
@@ -27,15 +27,19 @@ in
     enable = true;
 
     historyControl = [
-      "ignoredups" "erasedups"
+      "ignoredups"
+      "erasedups"
     ];
 
     historyIgnore = [
-      "ll" "ls" "cd"
+      "ll"
+      "ls"
+      "cd"
     ];
 
     shellOptions = [
-      "histappend" "checkjobs"
+      "histappend"
+      "checkjobs"
     ];
 
     inherit shellAliases;
@@ -71,8 +75,8 @@ in
       vi-ins-mode-string = "\\1\\e[6 q\\2";
       vi-cmd-mode-string = "\\1\\e[2 q\\2";
     };
-    extraConfig = 
-    ''$if mode=vi
+    extraConfig =
+      ''$if mode=vi
         set keymap vi-command
         "\e[B": history-search-forward
         "\e[A": history-search-backward
