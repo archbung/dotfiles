@@ -2,7 +2,7 @@
 let firefox = pkgs.firefox-beta-bin;
 in
 {
-  imports = [ ../../nix/common.nix ];
+  imports = [ ../../nixpkgs/common.nix ];
 
   home = {
     sessionVariables = { BROWSER = "${firefox}/bin/firefox"; };

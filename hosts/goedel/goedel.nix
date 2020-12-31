@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ../../nix/common.nix ];
+  imports = [ ../../nixpkgs/common.nix ];
 
   home.packages = with pkgs; [ zoom-us networkmanagerapplet stalonetray ];
 

@@ -1,11 +1,14 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ../common ./hardware-configuration.nix ];
+  imports = [
+    ../common.nix
+    ../personal.nix
+    ./hardware-configuration.nix
+  ];
 
   environment.systemPackages = with pkgs; [ amdvlk ];
 
-  networking.hostName = "heisenberg";
   networking.wireless = {
     enable = true;
     networks = {
@@ -17,16 +20,7 @@
     };
   };
 
-  services.xserver = {
-    videoDrivers = [ "amdgpu" "mesa" ];
-    xrandrHeads = [
-      { "output" = "DVI-D-0"; }
-      {
-        "output" = "DisplayPort-0";
-        "primary" = true;
-      }
-    ];
-  };
+  services.xserver.videoDrivers = [ "amdgpu" ];
 
   virtualisation = {
     docker.enable = true;

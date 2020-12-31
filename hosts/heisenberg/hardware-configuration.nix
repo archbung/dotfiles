@@ -13,20 +13,9 @@
     extraModulePackages = [ ];
   };
 
-  hardware = {
-    cpu.amd.updateMicrocode = config.hardware.enableRedistributableFirmware;
-
-    opengl = {
-      driSupport32Bit = true;
-      extraPackages = with pkgs; [ libva vaapiVdpau libvdpau-va-gl ];
-
-      extraPackages32 = with pkgs.pkgsi686Linux; [
-        libva
-        vaapiVdpau
-        libvdpau-va-gl
-      ];
-    };
-  };
+  hardware.cpu.amd.updateMicrocode = config.hardware.enableRedistributableFirmware;
+  hardware.opengl.driSupport32Bit = true;
+  hardware.pulseaudio.support32Bit = config.hardware.pulseaudio.enable;
 
   fileSystems."/" = {
     device = "/dev/disk/by-label/nixos";
@@ -46,5 +35,7 @@
     options = [ "nosuid" "nodev" "noexec" ];
   };
 
-  swapDevices = [ ];
+  swapDevices = [
+    { device = "/dev/disk/by-label/swap"; }
+    ];
 }
