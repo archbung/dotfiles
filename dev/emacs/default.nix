@@ -1,21 +1,26 @@
 { config, pkgs, ... }:
 
-# FIXME: Modify doom-emacs to use emacsGit
-let doom-emacs = pkgs.callPackage (builtins.fetchTarball "https://github.com/vlaci/nix-doom-emacs/archive/master.tar.gz")
-    {
-      doomPrivateDir = ./doom;
-      emacsPackagesOverlay = self: super: {
-        magit-delta = super.magit-delta.overrideAttrs (super: {
-          buildInputs = super.buildInputs ++ [ pkgs.git ];
-        });
-      };
-    };
-in
 {
   home = {
     packages = with pkgs; [
-      ripgrep fd clang emacsUnstable
-      sqlite  # for org-roam
+      # Emacs
+      binutils
+      emacsPgtkGcc
+
+      # Doom deps
+      git
+      (ripgrep.override { withPCRE2 = true; })
+      gnutls
+
+      # Optional deps
+      fd
+      imagemagick
+      zstd # for undo-fu
+
+      # Module deps
+      (aspellWithDicts (ds: with ds; [ en en-computers en-science ]))
+      languagetool
+      sqlite # for org-roam
     ];
 
     sessionVariables = {

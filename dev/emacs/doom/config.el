@@ -45,7 +45,8 @@
 (setq coq-compile-before-require t)
 
 ;; Latex
-(setq +latex-viewers '(zathura))
+(setq +latex-viewers '(zathura)
+      font-latex-fontify-script nil)
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
