@@ -38,6 +38,7 @@ in
   xsession.windowManager.command = "${xmonad}/bin/xmonad";
 
   services.picom = {
+    enable = true;
     backend = "glx";
     vSync = true;
     opacityRule = [
