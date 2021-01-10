@@ -57,5 +57,5 @@ main  = xmonad =<< xmobar (Ewmh.ewmh def
 
     where
         role = stringProperty "WM_WINDOW_ROLE"
-        menu = "dmenu_run -fn 'Inconsolata-12' -b"
+        menu = "dmenu_run -fn 'Inconsolata-12'"
         myTerminal = "kitty"

@@ -11,6 +11,13 @@
     packages = with pkgs; [ gcr ];
   };
 
+  programs.keychain = {
+    enable = true;
+    extraFlags = [ "--quiet" ];
+    keys = [ "id_cispa" "id_github" "id_gitlab" ];
+    agents = [ "ssh" ];
+  };
+
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;

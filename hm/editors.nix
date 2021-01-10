@@ -3,6 +3,8 @@
 {
   home = {
     packages = with pkgs; [
+      editorconfig-core-c
+
       # Emacs
       binutils
       emacsPgtkGcc
@@ -27,7 +29,18 @@
       DOOMDIR = "${config.home.homeDirectory}/.config/doom";
     };
 
-    file.".config/doom".source = ./doom;
+    file.".config/doom".source = ../config/doom;
+
+    file.".config/nvim/syntax".source = ../config/nvim/syntax;
+  };
+
+  programs.neovim = {
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
+    configure = {
+      customRC = builtins.readFile ../config/nvim/init.vim;
+    };
   };
 
   services.emacs.socketActivation.enable = true;

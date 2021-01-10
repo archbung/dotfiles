@@ -45,6 +45,7 @@ in
     inherit shellAliases;
   };
 
+  # View directories as trees
   programs.broot = {
     enable = true;
     enableBashIntegration = true;
@@ -58,13 +59,6 @@ in
   };
 
   programs.htop.enable = true;
-
-  programs.keychain = {
-    enable = true;
-    extraFlags = [ "--quiet" ];
-    keys = [ "id_cispa" "id_github" "id_gitlab" ];
-    agents = [ "ssh" ];
-  };
 
   programs.readline = {
     enable = true;
@@ -90,12 +84,14 @@ in
     '';
   };
 
+  # Fancy history
   programs.mcfly = {
     enable = true;
     enableBashIntegration = true;
     keyScheme = "vim";
   };
 
+  # Fancy prompt
   programs.starship = {
     enable = true;
     enableBashIntegration = true;

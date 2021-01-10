@@ -1,6 +1,16 @@
 { config, pkgs, ... }:
 
 {
+  home = {
+    sessionVariables = {
+      LEDGER_FILE = "${config.home.homeDirectory}/org/personal.journal";
+    };
+    packages = with pkgs; [
+      ledger
+      pandoc
+    ];
+  };
+
   programs.texlive = {
     enable = true;
     extraPackages = pkgs: {
@@ -21,4 +31,6 @@
         set font "Inconsolata 12"
       '';
   };
+
+  services.syncthing.enable = true;
 }

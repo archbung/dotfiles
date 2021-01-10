@@ -11,7 +11,7 @@ config = defaultConfig
     { font              = "xft:Inconsolata:size=12:antialias=true"
     , bgColor           = doomBg
     , fgColor           = zenburnFg
-    , position          = BottomSize C 100 defaultHeight
+    , position          = Top
     , border            = NoBorder
     , alpha             = 255
     , overrideRedirect  = True

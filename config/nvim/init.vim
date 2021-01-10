@@ -1,20 +1,32 @@
 " vim:set ts=2 sts=2 sw=2 et:
+set nocompatible
+
 "
 " Plugins
 "
+" Bootstrap vim-plug
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+  silent !curl -fLo '~/.config/nvim/autoload/plug.vim' --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin('~/.config/nvim/bundle')
-
+"
 " Essentials
-Plug 'tpope/vim-sensible'
+"
+Plug 'junegunn/vim-plug'   " Let vim-plug manage itself
+Plug 'tpope/vim-sensible'  " Sensible defaults
+
+" Git
 Plug 'tpope/vim-fugitive'
+
+" Parentheses, braces, etc
 Plug 'tpope/vim-surround'
-Plug 'junegunn/vim-plug'
+
+" Supercharge netrw
+Plug 'tpope/vim-vinegar'
+let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+'  " start netrw with dot files hidden
 
 " Finding things
 Plug 'preservim/nerdtree'
@@ -57,37 +69,51 @@ command! -bang -nargs=* Rg
 command! -bang -nargs=? -complete=dir Files
       \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
-Plug 'junegunn/gv.vim'
-Plug 'junegunn/goyo.vim'
+" Some handy mappings
+Plug 'tpope/vim-unimpaired'
 
+" Comfortably comment things
+Plug 'tpope/vim-commentary'
+
+"
+" Lang support
+"
 Plug 'sheerun/vim-polyglot'
 let g:haskell_classic_highlighting = 1
 let g:tex_flavor = "latex"
 let g:vimtex_view_method = "zathura"
 let g:vimtex_quickfix_mode = 1
 
+"
+" Linters and checkers
+"
 Plug 'dense-analysis/ale'
 let g:ale_fixers = {
       \   '*': [ 'remove_trailing_lines', 'trim_whitespace' ],
       \   'haskell': [ 'stylish-haskell' ],
-      \   'nix': [ 'nixpkgs-fmt' ],
       \ }
-
 let g:ale_linters = {
       \   'haskell': [ 'hlint' ],
       \ }
+let g:ale_list_window_size = 5
+let g:ale_fix_on_save = 1
 
+"
+" Snippets
+"
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
 let g:UltiSnipsExpandTrigger = "<C-j>"
 let g:UltiSnipsJumpForwardTrigger = "<C-b>"
 let g:UltiSnipsJumpBackwardTrigger = "<C-z>"
 
+"
+" Eye candies
+"
 Plug 'joshdick/onedark.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
-Plug 'maximbaz/lightline-ale'
-Plug 'psliwka/vim-smoothie'
+set noshowmode     " The modeline will show the mode
 let g:lightline = {
       \ 'colorscheme': 'onedark',
       \ 'active': {
@@ -120,34 +146,44 @@ function! LightlineFilename()
   let modified = &modified ? ' +' : ''
   return filename . modified
 endfunction
-
-set noshowmode
+Plug 'maximbaz/lightline-ale'
+Plug 'psliwka/vim-smoothie'
 
 call plug#end()
 
-
-"
-" Basic settings
-"
 set scrolloff=5
-set splitright splitbelow
-set cpoptions+=J
-set hidden
-set nobackup
-set nowritebackup
-set cmdheight=2
-set updatetime=300
-set shortmess+=c
-set signcolumn=yes
+set splitbelow splitright
 
+" No backup, swap, etc
 set noswapfile
 set nobackup
 set nowritebackup
 
+set hidden         " Don't nag about abandoned buffer
+set shortmess+=c   " Disable messages about completions
+set updatetime=300
+set cpoptions+=J   " A sentence must be followed by two spaces
+set signcolumn=yes
+
+" Enhance command-line completion
+set wildmenu
+set wildmode=list:longest,full
+
+set cmdheight=2    " Taller command line
+
+" Set up persistent undo across all files
+if has('persistent_undo')
+  let undodir=expand('$HOME/.local/share/nvim/undo')
+  if !isdirectory(undodir)
+    call mkdir(undodir, 'p')
+  endif
+  let &undodir=undodir
+  set undofile
+endif
+
 " Colors
 set termguicolors
 colorscheme onedark
-
 
 "
 " Keybindings
@@ -159,15 +195,15 @@ nnoremap k gk
 tnoremap <C-[> <C-\><C-n>
 
 nnoremap <leader>\ :NERDTreeToggle<CR>
-nnoremap <leader>ff :Files<CR>
+
+" fzf.vim keybindings
+nnoremap <leader>ff :Files ~<CR>
 nnoremap <leader>pf :Files<CR>
 nnoremap <leader>fr :History<CR>
 nnoremap <leader>bb :Buffers<CR>
 nnoremap <leader>sr :Rg<CR>
-nnoremap <leader>gs :Gstatus<CR>
-
-nnoremap <localleader>f :ALEFix<CR>
-
+nnoremap <leader>gg :Gstatus<CR>
+nnoremap <leader>gc :Commits<CR>
 
 "
 " Autocmd

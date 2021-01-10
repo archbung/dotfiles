@@ -66,6 +66,6 @@ in
   home = {
     packages = with pkgs; [ w3m ];
 
-    file.".config/neomutt".source = ./neomutt;
+    file.".config/neomutt".source = ../config/neomutt;
   };
 }

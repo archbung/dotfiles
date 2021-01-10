@@ -2,17 +2,19 @@
 
 {
   imports = [
-    ./gpg.nix
-    ./dev
-    ./shells.nix
-    ./terminal
-    ./gui
-    ./email
-    ./irc.nix
-
-    # Uncomment the appropriate option
-    ./heisenberg.nix
-    #./goedel.nix
+    ./hm/browsers.nix
+    ./hm/communications.nix
+    ./hm/desktop.nix
+    ./hm/dev.nix
+    ./hm/documents.nix
+    ./hm/editors.nix
+    ./hm/email.nix
+    ./hm/fonts.nix
+    ./hm/gaming.nix
+    ./hm/media.nix
+    ./hm/secrets.nix
+    ./hm/shells.nix
+    ./hm/terminal.nix
   ];
 
   # Let Home Manager install and manage itself.
@@ -23,10 +25,6 @@
   home = {
     username = "archbung";
     homeDirectory = "/home/archbung";
-
-    sessionVariables = {
-      LEDGER_FILE = "${config.home.homeDirectory}/org/personal.journal";
-    };
 
     activation = {
       disableCOW = lib.hm.dag.entryAfter [ "writeBoundary" ]
@@ -41,19 +39,7 @@
             $HOME/{downloads,.local/share/Steam}
         '';
     };
-
-    packages = with pkgs; [
-      ledger
-      noto-fonts
-      openconnect
-      mpv
-      zoom-us
-    ];
   };
-
-  programs.feh.enable = true;
-
-  services.syncthing.enable = true;
 
   xdg.userDirs = {
     enable = true;
