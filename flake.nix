@@ -3,52 +3,38 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/master";
-
-    home-manager.url = "github:nix-community/home-manager/master";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     emacs-overlay.url = "github:nix-community/emacs-overlay";
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    mozilla-overlay = {
+      url = "github:mozilla/nixpkgs-mozilla";
+      flake = false;
+    };
     nixos-hardware.url = "github:nixos/nixos-hardware";
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, ... }:
-    let
-      inherit (lib) attrValues;
+  outputs = inputs @ { nixpkgs, home-manager, ... }:
+  {
+    nixosConfigurations."heisenberg" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-
-      mkPkgs = pkgs: extraOverlays: import pkgs {
-        inherit system;
-        config.allowUnfree = true;
-        overlays = extraOverlays ++ (builtins.attrValues self.overlays);
-      };
-
-      pkgs = mkPkgs nixpkgs [ self.overlay ];
-
-    in {
-      overlays = mapModules ./overlays import;
-      packages."${system}" = mapModules ./packages (p: pkgs.callPackage p {});
-      nixosConfiguration = mapHost ./hosts { inherit system; };
-      # nixosConfigurations = forAllHostNames (hostName:
-      #   let
-      #     system = "x86_64-linux";
-      #     specialArgs = { inherit pkgs; };
-      #     hm-nixos-as-super = { config, ... }: {
-      #       options.home-manager.users = nixpkgs.lib.mkOption {
-      #         type = nixpkgs.lib.types.attrsOf
-      #           (nixpkgs.lib.types.submoduleWith {
-      #             modules = [ ];
-      #             specialArgs = specialArgs // { super = config; };
-      #           });
-      #       };
-      #     };
-
-      #     modules = [
-      #       home-manager.nixosModules.home-manager
-      #       hm-nixos-as-super
-      #       (./hosts + "/${hostName}")
-      #     ];
-
-      #   in
-      #   nixpkgs.lib.nixosSystem { inherit system modules specialArgs; });
+      modules = [
+        (import ./configuration.nix)
+        {
+          nixpkgs.overlays = with inputs; [
+            emacs-overlay.overlay
+            neovim-nightly-overlay.overlay
+          ];
+        }
+        home-manager.nixosModules.home-manager {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.archbung = import ./home;
+        }
+      ];
+      specialArgs = { inherit inputs; };
     };
+  };
 }
