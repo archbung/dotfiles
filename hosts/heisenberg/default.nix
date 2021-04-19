@@ -23,11 +23,6 @@
   programs.dconf.enable = true;  # for home-manager
 
 
-  # Install steam via flatpak
-  services.flatpak.enable = true;
-  xdg.portal.enable = true;
-
-
   # Nix configurations
   nix = {
     package = pkgs.nixFlakes;
