@@ -42,5 +42,5 @@ nnoremap <leader>pf :Files<CR>
 nnoremap <leader>fr :History<CR>
 nnoremap <leader>bb :Buffers<CR>
 nnoremap <leader>sr :Rg<CR>
-nnoremap <leader>gg :Gstatus<CR>
+nnoremap <leader>gg :Git<CR>
 nnoremap <leader>gc :Commits<CR>

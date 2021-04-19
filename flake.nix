@@ -21,7 +21,7 @@
     nixosConfigurations."heisenberg" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        (import ./configuration.nix)
+        (import ./hosts/heisenberg)
         {
           nixpkgs.overlays = with inputs; [
             emacs-overlay.overlay
@@ -31,7 +31,7 @@
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.archbung = import ./home;
+          home-manager.users.archbung = import ./nixpkgs;
         }
       ];
       specialArgs = { inherit inputs; };
