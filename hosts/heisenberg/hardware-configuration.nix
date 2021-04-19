@@ -3,7 +3,7 @@
 let nixos-hardware = inputs.nixos-hardware.nixosModules;
 in
 {
-  imports = [ 
+  imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     nixos-hardware.common-pc
     nixos-hardware.common-pc-ssd
@@ -14,7 +14,7 @@ in
   boot = {
     initrd = {
       availableKernelModules = [
-        "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" 
+        "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod"
       ];
       kernelModules = [];
     };
@@ -31,20 +31,20 @@ in
   fileSystems."/" =
     { device = "/dev/disk/by-label/nixos";
       fsType = "btrfs";
-      options = [ "defaults" "subvol=root" "discard" ];
+      options = [ "defaults" "compress=zstd" "subvol=root" "noatime" ];
     };
 
   fileSystems."/home" =
     { device = "/dev/disk/by-label/nixos";
       fsType = "btrfs";
-      options = [ "defaults" "subvol=home" "nosuid" "nodev" "discard" ];
+      options = [ "defaults" "compress=zstd" "subvol=home" "nosuid" "nodev" "relatime" ];
     };
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-label/esp";
       fsType = "vfat";
-      options = [ "defaults" "nosuid" "nodev" "noexec" "discard" ];
+      options = [ "defaults" "nosuid" "nodev" "noexec" "noatime" ];
     };
 
-  swapDevices = [ ];
+  swapDevices = [ { device = "/swap/swap.0"; } ];
 }
