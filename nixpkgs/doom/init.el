@@ -13,7 +13,7 @@
        ophints
        (popup +defaults)
        vc-gutter
-       vc-tilde-fringe
+       vi-tilde-fringe
        workspaces
        zen
 
@@ -46,7 +46,9 @@
        coq
        emacs-lisp
        ledger
+       markdown
        (org +journal +pandoc +pomodoro +roam)
+       sh
 
        :config
-       (default +binding +smartparens))
+       (default +bindings +smartparens))
