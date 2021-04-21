@@ -4,7 +4,7 @@
   users.users.archbung = {
     shell = pkgs.zsh;
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" ];
   };
   environment.pathsToLink = [ "/share/zsh" ];
 }
