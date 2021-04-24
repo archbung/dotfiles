@@ -27,7 +27,7 @@ main  = xmonad =<< xmobar (Ewmh.ewmh def
         , role =? "pop-up"      --> doFloat
         , appName =? "Steam"    --> doShift "9"
         , appName =? "zenity"   --> doFloat
-        , appName =? "emacs"    --> doShift "1"
+        , appName =? "Emacs"    --> doShift "1"
         , fullscreenManageHook
         ]
   , layoutHook  = let full = noBorders (fullscreenFull Full)

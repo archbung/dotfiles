@@ -45,10 +45,12 @@
   home.packages = with pkgs; [
     fira-code
     symbola
+    haskellPackages.xmobar
   ];
-  
-  home.file.xinitrc = {
-  	text =
+
+  home.file.".xmobarrc".text = builtins.readFile ./xmobarrc;
+
+  home.file.".xinitrc".text =
     ''
       if test -z "$DBUS_SESSION_BUS_ADDRESS"; then
         eval $(dbus-launch --exit-with-session --sh-syntax)
@@ -61,6 +63,4 @@
 
       exec xmonad
     '';
-    target = ".xinitrc";
-  };
 }
