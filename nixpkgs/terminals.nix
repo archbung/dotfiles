@@ -4,9 +4,9 @@
   programs.kitty = {
     enable = true;
     font = {
-      package = pkgs.inconsolata;
-      name = "Inconsolata";
-      size = 12;
+      package = pkgs.fira-code;
+      name = "Fira Code Light";
+      size = 10;
     };
     settings = {
       # Onedark theme
@@ -38,7 +38,7 @@
   programs.rofi = {
     enable = true;
     cycle = true;
-    font = "Inconsolata 12";
+    font = "Fira Code 10";
     lines = 2;
     width = 100;
     location = "top";

@@ -43,7 +43,6 @@
 
   # More fonts
   home.packages = with pkgs; [
-    fira-code
     symbola
     haskellPackages.xmobar
   ];
