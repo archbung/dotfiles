@@ -38,6 +38,10 @@ A dead simple NixOS configuration using Nix [Flakes](https://www.tweag.io/blog/2
 
 ## Install
 
+Install `nixFlakes` by e.g. `nix-shell -p nixFlakes`.
+Then run
 ```
 sudo nixos-rebuild switch --flake .#heisenberg
 ```
+
+If it fails, bootstrap the machine by copying `hosts/heisenberg` to `/etc/nixos` and renaming `default.nix` to `configuration.nix`.
