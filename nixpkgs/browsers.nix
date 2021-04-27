@@ -1,9 +1,9 @@
-{ pkgs, config, ... }:
+{ pkgs, config, latest, ... }:
 
 {
-  # TODO: somehow use inputs.mozilla-overlay
   programs.firefox = {
     enable = true;
+    package = pkgs.firefox;
   };
 
   home.sessionVariables = {

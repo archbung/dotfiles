@@ -1,4 +1,4 @@
-{ config, pkgs, lib, modulesPath, inputs, ... }:
+{ config, pkgs, lib, modulesPath, utils, inputs, ... }:
 
 let nixos-hardware = inputs.nixos-hardware.nixosModules;
 in
@@ -47,4 +47,9 @@ in
     };
 
   swapDevices = [ { device = "/swap/swap.0"; } ];
+
+  powerManagement = {
+    enable = true;
+    cpuFreqGovernor = "performance";
+  };
 }

@@ -4,11 +4,16 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
+    enableAutosuggestions = true;
     enableVteIntegration = true;
+
+    # Use vi keybindings
     defaultKeymap = "viins";
 
     history = {
+      extended = true;
       ignoreDups = true;
+      ignoreSpace = true;
     };
   };
 

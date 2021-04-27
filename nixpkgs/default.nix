@@ -6,7 +6,6 @@
     ./devs.nix
     ./comms.nix
     ./editors.nix
-    ./gaming.nix
     ./gui.nix
     ./secrets.nix
     ./shells.nix

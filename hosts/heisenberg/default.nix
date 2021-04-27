@@ -3,53 +3,26 @@
 {
   imports = [
     ./hardware-configuration.nix
-
-    ./i18n.nix
-    ./networking.nix
-    ./security.nix
-    ./sound.nix
-    ./users.nix
-    ./virtualization.nix
-    ./X11.nix
   ];
 
-
-  # Bare necessities
-  environment.systemPackages = with pkgs; [
-    cached-nix-shell
-    coreutils
-  ];
-
-  programs.dconf.enable = true;  # for home-manager
-
-
-  # Nix configurations
-  nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = "experimental-features = nix-command flakes";
-    binaryCaches = [
-      "https://cache.nixos.org/"
-      "https://nix-community.cachix.org"
-    ];
-    binaryCachePublicKeys = [
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    ];
-    registry = {
-      nixos.flake = inputs.nixpkgs;
-      nixpkgs.flake = inputs.nixpkgs;
-    };
-    useSandbox = true;
-    autoOptimiseStore = true;
-    trustedUsers = [ "root" "archbung" ];
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 30d";
-    };
+  # Networking
+  networking = {
+    hostName = "heisenberg";
+    interfaces.enp34s0.useDHCP = true;
+    interfaces.wlo1.useDHCP = true;
   };
 
-  nixpkgs.config.allowUnfree = true;
+  # Steam
+  programs.steam.enable = true;
+  hardware.pulseaudio.support32Bit = true;
 
-  system.configurationRevision = lib.mkIf (inputs.self ? rev) inputs.self.rev;
-  system.stateVersion = "21.05";
+  # Services
+  services = {
+    btrfs.autoScrub = {
+      enable = true;
+      interval = "monthly";
+    };
+
+    udisks2.enable = true;
+  };
 }

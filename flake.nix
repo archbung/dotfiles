@@ -3,38 +3,76 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/master";
+    nixos-hardware.url = "github:nixos/nixos-hardware";
+    flake-utils.url = "github:gytis-ivaskevicius/flake-utils-plus/staging";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     mozilla-overlay = {
       url = "github:mozilla/nixpkgs-mozilla";
       flake = false;
     };
-    nixos-hardware.url = "github:nixos/nixos-hardware";
   };
 
-  outputs = inputs @ { nixpkgs, home-manager, ... }:
-  {
-    nixosConfigurations."heisenberg" = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        (import ./hosts/heisenberg)
-        {
-          nixpkgs.overlays = with inputs; [
-            emacs-overlay.overlay
-            neovim-nightly-overlay.overlay
-          ];
-        }
-        home-manager.nixosModules.home-manager {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.archbung = import ./nixpkgs;
-        }
+  outputs = inputs @ { self, flake-utils, nixpkgs, ... }:
+    flake-utils.lib.systemFlake {
+      inherit self inputs;
+
+      # Channel definitions
+      channels.nixpkgs.input = nixpkgs;
+      channelsConfig = {
+        allowUnfree = true;
+      };
+
+      sharedOverlays = with inputs; [
+        nur.overlay
+        emacs-overlay.overlay
+        neovim-nightly-overlay.overlay
       ];
-      specialArgs = { inherit inputs; };
+
+      nixosModules = flake-utils.lib.modulesFromList [
+        ./modules/config.nix
+        ./modules/fonts.nix
+        ./modules/security.nix
+        ./modules/X11.nix
+        ./modules/virtualization.nix
+      ];
+
+      # Default host configurations
+      hostDefaults = {
+        system = "x86_64-linux";
+        # To avoid `infinite recursion` error in hardware-configuration.nix
+        # due to taking `inputs` as an argument.
+        specialArgs = { inherit flake-utils inputs; };
+        modules = with self.nixosModules; [
+          self.nixosModules.config
+          self.nixosModules.fonts
+          self.nixosModules.security
+          self.nixosModules.X11
+
+          inputs.home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.archbung = import ./nixpkgs;
+          }
+        ];
+      };
+
+      hosts = {
+        heisenberg.modules = with self.nixosModules; [
+          ./hosts/heisenberg
+          virtualization
+        ];
+      };
     };
-  };
 }

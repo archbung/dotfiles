@@ -1,4 +1,5 @@
 { pkgs, config, ... }:
+
 {
   xsession = {
     enable = true;
@@ -8,8 +9,6 @@
       config = ./xmonad.hs;
     };
   };
-
-  fonts.fontconfig.enable = true;
 
   gtk = {
     enable = true;
@@ -41,9 +40,7 @@
     };
   };
 
-  # More fonts
   home.packages = with pkgs; [
-    symbola
     haskellPackages.xmobar
   ];
 

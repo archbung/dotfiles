@@ -3,8 +3,8 @@
 (setq user-full-name "Hizbullah Abdul Aziz Jabbar"
       user-mail-address "archbung@gmail.com")
 
-(setq doom-font (font-spec :family "Fira Code" :size 13 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "Fira Code" :size 13))
+(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 13 :weight 'semi-light)
+      doom-variable-pitch-font (font-spec :family "FiraCode Nerd Font" :size 13))
 
 (setq doom-theme 'doom-one)
 

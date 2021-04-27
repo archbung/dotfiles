@@ -18,5 +18,6 @@
     x11docker
     docker-compose
     docker-machine
+    virt-manager
   ];
 }

@@ -1,6 +1,6 @@
 Config {
 	-- appearance
-    font 				= "xft:Fira Code:size=10:antialias,-misc-fixed-*-*-*-*-14-*-*-*-*-*-*-*"
+    font 				= "xft:FiraCode Nerd Font:size=10:antialias,-misc-fixed-*-*-*-*-14-*-*-*-*-*-*-*"
   , bgColor 		= "black"
   , fgColor 		= "#646464"
   , position 		= Top
