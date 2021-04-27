@@ -22,18 +22,16 @@ A dead simple NixOS configuration using Nix [Flakes](https://www.tweag.io/blog/2
 # mount /dev/sda2 /mnt -o subvol=root,compress=zstd
 # mkdir	-p /mnt/{boot,home}
 # mount /dev/sda2 /mnt/home -o subvol=home,compress=zstd
-# btrfs subvolume create /mnt/var
-# btrfs subvolume create /mnt/tmp
 # btrfs subvolume create /mnt/swap
 # mkfs.fat -F32 -n esp /dev/sda1
 # mount /dev/sda1 /mnt/boot
-# truncate -s 0 /mnt/swap/swap.0
-# chattr +C /mnt/swap/swap.0
-# btrfs property set /mnt/swap/swap.0 compression none
+# truncate -s 0 /mnt/swap/0.swap
+# chattr +C /mnt/swap/0.swap
+# btrfs property set /mnt/swap/0.swap compression none
 # dd bs=1M count=16384 status=progress if=/dev/zero of=/mnt/swap/swap.0
-# chmod 600 /mnt/swap/swap.0
-# mkswap -L swap /mnt/swap/swap.0
-# swapon /mnt/swap/swap.0
+# chmod 600 /mnt/swap/0.swap
+# mkswap -L swap /mnt/swap/0.swap
+# swapon /mnt/swap/0.swap
 ```
 
 ## Install
@@ -41,7 +39,8 @@ A dead simple NixOS configuration using Nix [Flakes](https://www.tweag.io/blog/2
 Install `nixFlakes` by e.g. `nix-shell -p nixFlakes`.
 Then run
 ```
-sudo nixos-rebuild switch --flake .#heisenberg
+sudo nixos-install --flake .#heisenberg
 ```
 
-If it fails, bootstrap the machine by copying `hosts/heisenberg` to `/etc/nixos` and renaming `default.nix` to `configuration.nix`.
+If it fails, bootstrap the machine by copying `module/config.nix` to `/etc/nixos` and renaming it to `configuration.nix`.
+Furthermore, some edits are required (namely, commenting out/deleting anything that depends on `inputs`).

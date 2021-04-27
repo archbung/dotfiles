@@ -1,9 +1,8 @@
-{ pkgs, config, latest, ... }:
+{ pkgs, config, inputs, ... }:
 
 {
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox;
   };
 
   home.sessionVariables = {

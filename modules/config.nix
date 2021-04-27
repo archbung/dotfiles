@@ -70,6 +70,7 @@
 
   # Bare necessities
   environment.systemPackages = with pkgs; [
+    git
     cached-nix-shell
     coreutils
     pulsemixer

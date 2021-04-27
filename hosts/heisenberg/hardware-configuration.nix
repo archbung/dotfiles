@@ -46,7 +46,7 @@ in
       options = [ "defaults" "nosuid" "nodev" "noexec" "noatime" ];
     };
 
-  swapDevices = [ { device = "/swap/swap.0"; } ];
+  swapDevices = [ { device = "/swap/0.swap"; } ];
 
   powerManagement = {
     enable = true;
