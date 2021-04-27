@@ -54,10 +54,10 @@
         # due to taking `inputs` as an argument.
         specialArgs = { inherit flake-utils inputs; };
         modules = with self.nixosModules; [
-          self.nixosModules.config
-          self.nixosModules.fonts
-          self.nixosModules.security
-          self.nixosModules.X11
+          config
+          fonts
+          security
+          X11
 
           inputs.home-manager.nixosModules.home-manager
           {
