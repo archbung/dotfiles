@@ -6,6 +6,7 @@
     ./devs.nix
     ./comms.nix
     ./editors.nix
+    ./gaming.nix
     ./gui.nix
     ./secrets.nix
     ./shells.nix
@@ -38,7 +39,7 @@
   xdg.userDirs = {
     enable = true;
     createDirectories = true;
-    desktop = "\$HOME/";
+    desktop = "\$HOME/desktop";
     documents = "\$HOME/documents";
     download = "\$HOME/downloads";
     music = "\$HOME/music";

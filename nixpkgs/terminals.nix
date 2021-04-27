@@ -53,7 +53,7 @@
   programs.zathura = {
     enable = true;
     options = {
-      font = "Inconsolata 12";
+      font = "Fira Code 10";
     };
   };
 
