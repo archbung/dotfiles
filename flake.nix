@@ -33,10 +33,11 @@
         allowUnfree = true;
       };
 
-      sharedOverlays = with inputs; [
-        nur.overlay
-        emacs-overlay.overlay
-        neovim-nightly-overlay.overlay
+      sharedOverlays = [
+        inputs.nur.overlay
+        inputs.emacs-overlay.overlay
+        inputs.neovim-nightly-overlay.overlay
+        (final: prev: import (inputs.mozilla-overlay) final prev)
       ];
 
       nixosModules = flake-utils.lib.modulesFromList [

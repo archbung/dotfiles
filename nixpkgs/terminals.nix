@@ -5,7 +5,7 @@
     enable = true;
     font = {
       package = pkgs.fira-code;
-      name = "FiraCode Nerd Font";
+      name = "RobotoMono Nerd Font";
       size = 10;
     };
     settings = {
@@ -38,7 +38,7 @@
   programs.rofi = {
     enable = true;
     cycle = true;
-    font = "FiraCode Nerd Font 10";
+    font = "RobotoMono Nerd Font 10";
     lines = 2;
     width = 100;
     location = "top";
@@ -53,7 +53,7 @@
   programs.zathura = {
     enable = true;
     options = {
-      font = "FiraCode Nerd Font 10";
+      font = "RobotoMono Nerd Font 10";
     };
   };
 

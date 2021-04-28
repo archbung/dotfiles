@@ -8,7 +8,11 @@
       symbola
 
       material-design-icons
-      (nerdfonts.override { fonts = [ "FiraCode" ]; })
+      (nerdfonts.override { fonts = [
+        "RobotoMono"
+        "FiraCode"
+        "InconsolataGo"
+      ]; })
     ];
 
     # Use user-defined fonts instead of the default ones
@@ -16,7 +20,7 @@
     fontconfig.defaultFonts = {
       serif = [ "Noto Serif Display" ];
       sansSerif = [ "Noto Sans Display" ];
-      monospace = [ "FiraCode Nerd Font" ];
+      monospace = [ "RobotoMono Nerd Font" ];
       emoji = [ "Noto Color Emoji" ];
     };
   };
