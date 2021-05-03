@@ -44,6 +44,7 @@
         ./modules/config.nix
         ./modules/fonts.nix
         ./modules/security.nix
+        ./modules/sound.nix
         ./modules/X11.nix
         ./modules/virtualization.nix
       ];
@@ -58,6 +59,7 @@
           config
           fonts
           security
+          sound
           X11
 
           inputs.home-manager.nixosModules.home-manager

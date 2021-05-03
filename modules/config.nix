@@ -7,7 +7,7 @@
   users.users.archbung = {
     shell = pkgs.zsh;
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "docker" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" "audio" ];
   };
   environment.pathsToLink = [ "/share/zsh" ];
 
@@ -28,13 +28,6 @@
   services.avahi = {
     enable = true;
     nssmdns = true;
-  };
-
-  # Sound configurations
-  sound.enable = true;
-  hardware.pulseaudio = {
-    enable = true;
-    package = pkgs.pulseaudioFull;
   };
 
   # Nix configurations
@@ -73,6 +66,5 @@
     git
     cached-nix-shell
     coreutils
-    pulsemixer
   ];
 }
