@@ -9,6 +9,7 @@
     ./gui.nix
     ./secrets.nix
     ./shells.nix
+    ./sound.nix
     ./terminals.nix
   ];
 

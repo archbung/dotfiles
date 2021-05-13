@@ -30,12 +30,28 @@
     nssmdns = true;
   };
 
-  # Sound configurations
+  # Sound configurations, with bluetooth
   sound.enable = true;
   hardware.pulseaudio = {
     enable = true;
+    extraModules = [ pkgs.pulseaudio-modules-bt ];  # enable extra bluetooth codecs
     package = pkgs.pulseaudioFull;
+    extraConfig =
+    ''
+      load-module module-switch-on-connect
+    '';
   };
+
+  hardware.bluetooth = {
+    enable = true;
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+      };
+    };
+  };
+
+  services.blueman.enable = true;
 
   # Nix configurations
   nix = {
