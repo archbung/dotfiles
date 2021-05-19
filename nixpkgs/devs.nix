@@ -29,7 +29,7 @@
       signByDefault = true;
     };
   };
-    
+
   programs.opam = {
     enable = true;
     enableZshIntegration = true;
@@ -37,8 +37,12 @@
 
   programs.texlive = {
     enable = true;
-    extraPackages = ts: { 
-      inherit (ts) collection-fontsrecommended algorithms; 
+    extraPackages = ts: {
+      inherit (ts)
+      scheme-small latex latex-bin latexconfig latex-fonts tools pdftex luatex
+      babel babel-english carlisle ec geometry graphics graphics-def hyperref
+      lm marvosym oberdiek parskip mathtools amsmath amscls biblatex url
+      csquotes latexmk stmaryrd mathpartir algorithms biber;
     };
   };
 
