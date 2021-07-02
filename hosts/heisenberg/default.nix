@@ -25,4 +25,6 @@
 
     udisks2.enable = true;
   };
+
+  documentation.info.enable = false;
 }

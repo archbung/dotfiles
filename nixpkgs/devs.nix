@@ -39,7 +39,7 @@
     enable = true;
     extraPackages = ts: {
       inherit (ts)
-      scheme-small latex latex-bin latexconfig latex-fonts tools pdftex luatex
+      scheme-full latex latex-bin latexconfig latex-fonts tools pdftex luatex
       babel babel-english carlisle ec geometry graphics graphics-def hyperref
       lm marvosym oberdiek parskip mathtools amsmath amscls biblatex url
       csquotes latexmk stmaryrd mathpartir algorithms biber;
