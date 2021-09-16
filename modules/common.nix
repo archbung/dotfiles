@@ -1,66 +1,38 @@
 { config, pkgs, lib, inputs, ... }:
 
 {
-  programs.dconf.enable = true;  # for home-manager
+  # For home-manager
+  programs.dconf.enable = true;
 
-  # User configurations
+  # User configuration
   users.users.archbung = {
     shell = pkgs.zsh;
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "docker" ];
+    extraGroups = [ "wheel" "docker" ];
   };
   environment.pathsToLink = [ "/share/zsh" ];
 
-  # Locale configurations
+  # Locale configuration
   time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "en_US.UTF-8";
-    console = {
+  console = {
     font = "Lat2-Terminus16";
     keyMap = "us";
   };
-
-  # Networking
-  networking = {
-    networkmanager.enable = true;
-    useDHCP = false;
+  location = {
+    provider = "manual";
+    latitude = 49.279530;
+    longitude = 7.034970;
   };
 
-  services.avahi = {
-    enable = true;
-    nssmdns = true;
-  };
-
-  # Sound configurations, with bluetooth
-  sound.enable = true;
-  hardware.pulseaudio = {
-    enable = true;
-    extraModules = [ pkgs.pulseaudio-modules-bt ];  # enable extra bluetooth codecs
-    package = pkgs.pulseaudioFull;
-    extraConfig =
-    ''
-      load-module module-switch-on-connect
-    '';
-  };
-
-  hardware.bluetooth = {
-    enable = true;
-    settings = {
-      General = {
-        Enable = "Source,Sink,Media,Socket";
-      };
-    };
-  };
-
-  services.blueman.enable = true;
-
-  # Nix configurations
+  # Nix configuration
   nix = {
     package = pkgs.nixUnstable;
     extraOptions = "experimental-features = nix-command ca-references flakes";
     binaryCaches = [
       "https://cache.nixos.org/"
-      "https://cachix.cachix.org/"
-      "https://nix-community.cachix.org"
+      "https://cachix.cachix.org"
+      "https://nix-community.cachix.org/"
     ];
     binaryCachePublicKeys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -80,15 +52,13 @@
       options = "--delete-older-than 7d";
     };
   };
-
   system.configurationRevision = lib.mkIf (inputs.self ? rev) inputs.self.rev;
-  system.stateVersion = "21.05";
+  system.stateVersion = "21.11";
 
   # Bare necessities
   environment.systemPackages = with pkgs; [
     git
     cached-nix-shell
     coreutils
-    pulsemixer
   ];
 }

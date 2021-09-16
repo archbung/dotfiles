@@ -18,7 +18,7 @@ in
       ];
       kernelModules = [];
     };
-    kernelPackages = pkgs.linuxPackages_5_13;
+    #kernelPackages = pkgs.linuxPackages_5_11;
     kernelModules = [ "kvm-amd" ];
     extraModulePackages = [];
     loader = {

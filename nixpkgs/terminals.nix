@@ -4,9 +4,8 @@
   programs.kitty = {
     enable = true;
     font = {
-      package = pkgs.fira-code;
-      name = "RobotoMono Nerd Font";
-      size = 10;
+      name = "InconsolataGo Nerd Font Mono";
+      size = 12;
     };
     settings = {
       # Onedark theme
@@ -38,7 +37,7 @@
   programs.rofi = {
     enable = true;
     cycle = true;
-    font = "RobotoMono Nerd Font 10";
+    font = "InconsolataGo Nerd Font Mono 12";
     lines = 2;
     width = 100;
     location = "top";
@@ -53,7 +52,7 @@
   programs.zathura = {
     enable = true;
     options = {
-      font = "RobotoMono Nerd Font 10";
+      font = "InconsolataGo Nerd Font Mono 12";
     };
   };
 

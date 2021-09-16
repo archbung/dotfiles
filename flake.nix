@@ -1,25 +1,15 @@
 {
-  description = "A simple flake-based NixOS configuration.";
+  description = "A flake-based NixOS configuration.";
 
   inputs = {
     nixpkgs.url = "nixpkgs/master";
     nixos-hardware.url = "github:nixos/nixos-hardware";
     flake-utils.url = "github:gytis-ivaskevicius/flake-utils-plus/staging";
-
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nur = {
-      url = "github:nix-community/NUR";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    mozilla-overlay = {
-      url = "github:mozilla/nixpkgs-mozilla";
-      flake = false;
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    home-manager = {
+        url = "github:nix-community/home-manager";
+        inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -29,39 +19,34 @@
 
       # Channel definitions
       channels.nixpkgs.input = nixpkgs;
-      channelsConfig = {
-        allowUnfree = true;
-      };
+      channelsConfig.allowUnfree = true;
 
-      sharedOverlays = [
-        inputs.nur.overlay
-        inputs.emacs-overlay.overlay
-        inputs.neovim-nightly-overlay.overlay
-        (final: prev: import (inputs.mozilla-overlay) final prev)
+      sharedOverlays = with inputs; [
+        neovim-nightly-overlay.overlay
+        emacs-overlay.overlay
       ];
 
       nixosModules = flake-utils.lib.modulesFromList [
-        ./modules/config.nix
+        ./modules/common.nix
         ./modules/fonts.nix
+        ./modules/network.nix
         ./modules/security.nix
+        ./modules/sound.nix
         ./modules/X11.nix
         ./modules/virtualization.nix
       ];
 
-      # Default host configurations
       hostDefaults = {
         system = "x86_64-linux";
-        # To avoid `infinite recursion` error in hardware-configuration.nix
-        # due to taking `inputs` as an argument.
         specialArgs = { inherit flake-utils inputs; };
         modules = with self.nixosModules; [
-          config
+          common
           fonts
+          network
           security
+          sound
           X11
-
-          inputs.home-manager.nixosModules.home-manager
-          {
+          inputs.home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.archbung = import ./nixpkgs;

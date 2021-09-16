@@ -3,8 +3,8 @@
 (setq user-full-name "Hizbullah Abdul Aziz Jabbar"
       user-mail-address "archbung@gmail.com")
 
-(setq doom-font (font-spec :family "RobotoMono Nerd Font" :size 13 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "RobotoMono Nerd Font" :size 13))
+(setq doom-font (font-spec :family "InconsolataGo Nerd Font Mono" :size 16 :weight 'semi-light)
+      doom-variable-pitch-font (font-spec :family "InconsolataGo Nerd Font Mono" :size 16))
 
 (setq doom-theme 'doom-one)
 

@@ -2,7 +2,7 @@
 
 (doom! :completion
        company
-       ivy
+       vertico
 
        :ui
        doom
@@ -29,12 +29,16 @@
        undo
        vc
 
+       :term
+       vterm
+
        :checkers
        syntax
-       spell
+       (spell +flyspell)
        grammar
 
        :tools
+       editorconfig
        (eval +overlay)
        lookup
        magit
@@ -45,8 +49,10 @@
        :lang
        coq
        emacs-lisp
+       latex
        ledger
        markdown
+       nix
        (org +journal +pandoc +pomodoro +roam)
        sh
 
