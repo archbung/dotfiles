@@ -8,3 +8,4 @@ For a full-blown [NixOS](https://nixos.org/) configurations using [Flakes](https
 
 - [neovim](https://neovim.io/) and its [config](https://github.com/archbung/nvim) dependencies
 - [delta](https://github.com/dandavison/delta)
+- [gcr](https://gitlab.gnome.org/GNOME/gcr) for pinentry
