@@ -12,4 +12,6 @@ For a full-blown [NixOS](https://nixos.org/) configurations using [Flakes](https
 - [fish](https://fishshell.com/)
 - [starship](https://starship.rs/)
 - [zoxide](https://github.com/ajeetdsouza/zoxide)
+- [exa](https://the.exa.website/)
+- [bat](https://github.com/sharkdp/bat)
 - [gcr](https://gitlab.gnome.org/GNOME/gcr) for pinentry
