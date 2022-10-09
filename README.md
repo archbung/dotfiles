@@ -8,6 +8,7 @@ For a full-blown [NixOS](https://nixos.org/) configurations using [Flakes](https
 
 - [neovim](https://neovim.io/) and its [config](https://github.com/archbung/nvim) dependencies
 - [firefox-nightly](https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly)
+- [wezterm](https://wezfurlong.org/wezterm/)
 - [delta](https://github.com/dandavison/delta)
 - [fish](https://fishshell.com/)
 - [starship](https://starship.rs/)
