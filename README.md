@@ -7,6 +7,7 @@ For a full-blown [NixOS](https://nixos.org/) configurations using [Flakes](https
 ## Required programs
 
 - [neovim](https://neovim.io/) and its [config](https://github.com/archbung/nvim) dependencies
+- [firefox-nightly](https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly)
 - [delta](https://github.com/dandavison/delta)
 - [fish](https://fishshell.com/)
 - [starship](https://starship.rs/)

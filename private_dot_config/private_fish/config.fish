@@ -2,6 +2,9 @@
 if status is-interactive
   set -gx GPG_TTY $(tty)
   set -gx EDITOR "nvim"
+  set -gx BROWSER "firefox-nightly"
+
+  fish_vi_key_bindings
 
   keychain --eval --quiet -Q id_github id_gitlab | source
   starship init fish | source
