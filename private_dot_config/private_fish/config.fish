@@ -6,7 +6,7 @@ if status is-interactive
 
   fish_vi_key_bindings
 
-  keychain --eval --quiet -Q id_github id_gitlab | source
+  keychain --eval --quiet -Q id_github | source
   starship init fish | source
   zoxide init fish | source
 end
