@@ -1,18 +1,43 @@
 # dotfiles
 
-A simple configurations managed by [chezmoi](https://www.chezmoi.io/).
+A simple configurations managed by [chezmoi](https://www.chezmoi.io/) based on [Hyprland](https://hyprland.org).
 
-For a full-blown [NixOS](https://nixos.org/) configurations using [Flakes](https://nixos.wiki/wiki/Flakes), checkout the `nixos` branch.
+For a full-blown [NixOS](https://nixos.org/) configurations using [flakes](https://nixos.wiki/wiki/Flakes), check out the `nixos` branch.
+Additionally, for a legacy dotfiles built around [xmonad](https://xmonad.org), check out the `x11` branch.
 
-## Required programs
+The configuration makes use of the following programs:
 
-- [neovim](https://neovim.io/) and its [config](https://github.com/archbung/nvim) dependencies
-- [firefox-nightly](https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly)
-- [wezterm](https://wezfurlong.org/wezterm/)
-- [delta](https://github.com/dandavison/delta)
+## Shell
+
 - [fish](https://fishshell.com/)
 - [starship](https://starship.rs/)
 - [zoxide](https://github.com/ajeetdsouza/zoxide)
 - [exa](https://the.exa.website/)
 - [bat](https://github.com/sharkdp/bat)
-- [gcr](https://gitlab.gnome.org/GNOME/gcr) for pinentry
+- [delta](https://github.com/dandavison/delta)
+- [keychain](https://github.com/funtoo/keychain)
+
+## Notification
+
+- [mako](https://github.com/emersion/mako)
+
+## Desktop utils
+
+- [gammastep](https://gitlab.com/chinstrap/gammastep)
+- [wofi](https://hg.sr.ht/~scoopta/wofi)
+
+## Terminal emulator
+
+- [kitty](https://wezfurlong.org/wezterm/)
+
+## Editor
+
+- [neovim](https://neovim.io/)
+- [ghcup](https://www.haskell.org/ghcup/) for [Haskell](https://www.haskell.org/) support
+- [ripgrep](https://github.com/BurntSushi/ripgrep)
+- [fd](https://github.com/sharkdp/fd)
+- [fzy](https://github.com/jhawthorn/fzy)
+
+## Browser
+
+- [firefox-developer-edition](https://www.mozilla.org/en-US/firefox/developer/)
