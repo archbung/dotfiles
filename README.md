@@ -25,6 +25,7 @@ The configuration makes use of the following programs:
 
 - [gammastep](https://gitlab.com/chinstrap/gammastep)
 - [wofi](https://hg.sr.ht/~scoopta/wofi)
+- [swww](https://github.com/Horus645/swww)
 
 ## Terminal emulator
 
