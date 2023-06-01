@@ -8,9 +8,9 @@ if status is-interactive
   set -gx GHCUP_USE_XDG_DIRS 1
 
   fish_vi_key_bindings
-  fish_add_path ~/.ghcup/bin ~/.cargo/bin ~/.cabal/bin ~/.local/bin
+  fish_add_path ~/.local/bin ~/.cargo/bin
 
   starship init fish | source
   zoxide init fish   | source
-  keychain --eval --quiet -Q id_github id_gitlab indo_xiswa aws_xiswa | source
+  keychain --eval --quiet -Q id_github id_gitlab api_indo_xiswa indo_xiswa aws_xiswa | source
 end
