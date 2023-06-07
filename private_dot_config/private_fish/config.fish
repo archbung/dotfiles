@@ -12,7 +12,7 @@ if status is-interactive
 
   starship init fish | source
   zoxide init fish   | source
-  keychain --eval --quiet -Q id_github id_gitlab api_indo_xiswa indo_xiswa aws_xiswa | source
+  keychain --eval --quiet -Q id_github id_gitlab id_haskell | source
 
   if status is-login
     if test -z "$WAYLAND_DISPLAY" -a "$XDG_VTNR" = 1
