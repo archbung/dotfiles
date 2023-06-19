@@ -10,22 +10,24 @@
 [core]
   pager = delta
 
+[user]
+	signingKey = C2FCAFB1282DB020
+
+[commit]
+	gpgSign = true
+
 [interactive]
   diffFilter = delta --color-only
+
 [add.interactive]
   useBuiltin = false
 
 [delta]
-  navigate = true
-  light = false
+  navigate = true  # use n and N to move between diff sections
+  light = false    # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
 
 [merge]
   conflictstyle = diff3
 
 [diff]
   colorMoved = default
-
-[user]
-	signingKey = 69309FDC272F75E1
-[commit]
-	gpgSign = true
