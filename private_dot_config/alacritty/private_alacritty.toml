@@ -1,0 +1,18 @@
+
+[terminal.shell]
+program = "/usr/bin/fish"
+
+[font]
+normal.family = "Inconsolata Nerd Font Mono"
+size = 8.0
+
+[env]
+TERM = "alacritty-direct"
+
+[general]
+import = [
+  "~/.config/alacritty/macchiato.toml"
+]
+
+[terminal]
+
