@@ -11,6 +11,13 @@ return {
           mason = false,
           cmd = { vim.fn.expand("~/.rbenv/shims/rubocop"), "--lsp" },
         },
+        pyright = {
+          mason = false,
+          cmd = { "uv", "run", "pyright-langserver", "--stdio" },
+        },
+        hls = {
+          mason = false,
+        },
       },
     },
   },
